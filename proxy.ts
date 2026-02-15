@@ -33,7 +33,7 @@ export async function updateSession(request: NextRequest) {
     return supabaseResponse
 }
 
-export const middleware = async (request: NextRequest) => {
+export default async function proxy(request: NextRequest) {
     return await updateSession(request)
 }
 
