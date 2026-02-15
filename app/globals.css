@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --font-heading: var(--font-outfit);
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  --background: #F8FAFC; /* slate-50 */
+  --foreground: #0F172A; /* slate-900 */
+  
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  
+  --primary: #0F172A; /* slate-900 */
+  --primary-foreground: #F8FAFC; /* slate-50 */
+  
+  --secondary: #E2E8F0; /* slate-200 */
+  --secondary-foreground: #1E293B; /* slate-800 */
+  
+  --muted: #F1F5F9; /* slate-100 */
+  --muted-foreground: #64748B; /* slate-500 */
+  
+  --accent: #F0FDFA; /* teal-50 */
+  --accent-foreground: #0F766E; /* teal-700 */
+  
+  --destructive: #FB7185; /* rose-400 */
+  --destructive-foreground: #FFF1F2; /* rose-50 */
+
+  --border: #E2E8F0; /* slate-200 */
+  --input: #E2E8F0;
+  --ring: #94A3B8; /* slate-400 */
+  
+  --radius: 0.75rem; /* softer, rounded look */
+}
+
+.dark {
+  --background: #020617; /* slate-950 */
+  --foreground: #F8FAFC; /* slate-50 */
+  
+  --card: #0F172A; /* slate-900 */
+  --card-foreground: #F8FAFC;
+  
+  --popover: #0F172A;
+  --popover-foreground: #F8FAFC;
+  
+  --primary: #F8FAFC; /* slate-50 */
+  --primary-foreground: #0F172A; /* slate-900 */
+  
+  --secondary: #1E293B; /* slate-800 */
+  --secondary-foreground: #F8FAFC; /* slate-50 */
+  
+  --muted: #1E293B; /* slate-800 */
+  --muted-foreground: #94A3B8; /* slate-400 */
+  
+  --accent: #115E59; /* teal-800 */
+  --accent-foreground: #CCFBF1; /* teal-100 */
+  
+  --destructive: #be123c; /* rose-700 */
+  --destructive-foreground: #FFF1F2; /* rose-50 */
+  
+  --border: #1E293B; /* slate-800 */
+  --input: #1E293B;
+  --ring: #475569; /* slate-600 */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.02em; /* slightly tighter for aesthetic */
+}
