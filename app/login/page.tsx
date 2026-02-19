@@ -73,31 +73,31 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4 font-quicksand">
+        <div className="min-h-screen flex items-center justify-center bg-lofi-bg p-4 font-quicksand transition-colors duration-300">
             {/* Main Phone-style Container */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="w-full max-w-[390px] min-h-[780px] bg-lofi-cream rounded-[3rem] shadow-2xl overflow-hidden border-[8px] border-lofi-black relative flex flex-col grid-background"
+                className="w-full max-w-[390px] min-h-[700px] sm:min-h-[780px] bg-lofi-card rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl overflow-hidden border-[6px] sm:border-[8px] border-lofi-text relative flex flex-col grid-background"
             >
                 {/* Status Bar Decor */}
-                <div className="px-8 pt-6 pb-2 flex justify-between items-center text-sm font-bold text-lofi-black z-10">
+                <div className="px-8 pt-6 pb-2 flex justify-between items-center text-sm font-bold text-lofi-text z-10">
                     <span>9:41</span>
                     <div className="flex gap-1.5 items-center opacity-80">
-                        <div className="w-5 h-2.5 border border-lofi-black rounded-sm relative">
-                            <div className="absolute left-0 top-0 h-full bg-lofi-black w-[80%]" />
+                        <div className="w-5 h-2.5 border border-lofi-text rounded-sm relative">
+                            <div className="absolute left-0 top-0 h-full bg-lofi-text w-[80%]" />
                         </div>
                     </div>
                 </div>
 
                 {/* Decorative Floating Icons */}
-                <div className="absolute top-20 left-6 text-lofi-black opacity-20">
+                <div className="absolute top-20 left-6 text-lofi-text opacity-20">
                     <Sun className="w-8 h-8" />
                 </div>
-                <div className="absolute top-28 right-8 text-lofi-black opacity-20">
+                <div className="absolute top-28 right-8 text-lofi-text opacity-20">
                     <Heart className="w-6 h-6" />
                 </div>
-                <div className="absolute bottom-40 left-8 text-lofi-black opacity-10">
+                <div className="absolute bottom-40 left-8 text-lofi-text opacity-10">
                     <CloudLightning className="w-6 h-6" />
                 </div>
 
@@ -105,17 +105,17 @@ export default function LoginPage() {
                 <div className="relative h-1/4 flex flex-col items-center justify-center pt-8">
                     <motion.div
                         whileHover={{ rotate: 10 }}
-                        className="w-24 h-24 bg-white border-2 border-lofi-black rounded-full flex items-center justify-center stamp-border"
+                        className="w-24 h-24 bg-lofi-card lofi-border rounded-full flex items-center justify-center stamp-border"
                     >
-                        <Leaf className="w-12 h-12 text-lofi-black" />
+                        <Leaf className="w-12 h-12 text-lofi-text" />
                     </motion.div>
                 </div>
 
                 {/* Content Section */}
                 <div className="flex-1 px-8 flex flex-col z-10">
                     <div className="text-center mb-10">
-                        <h1 className="text-4xl font-display font-bold text-lofi-black mb-1 tracking-tight">Breeze</h1>
-                        <p className="text-lofi-black font-medium opacity-60">
+                        <h1 className="text-4xl font-display font-bold text-lofi-text mb-1 tracking-tight">Breeze</h1>
+                        <p className="text-lofi-text font-medium opacity-60">
                             {isSignUp ? "Join the Growth Journey" : "Your Growth Companion"}
                         </p>
                     </div>
@@ -123,7 +123,7 @@ export default function LoginPage() {
                     <form className="space-y-4" onSubmit={handleAuth}>
                         <div className="relative group">
                             <input
-                                className="w-full px-6 py-4 bg-white border-2 border-lofi-black rounded-full focus:ring-4 focus:ring-lofi-yellow/20 outline-none text-lofi-black text-lg font-medium placeholder:text-lofi-grey transition-all"
+                                className="w-full px-6 py-4 bg-lofi-card border-2 border-lofi-text rounded-full focus:ring-4 focus:ring-lofi-yellow/20 outline-none text-lofi-text text-lg font-medium placeholder:text-lofi-grey transition-all"
                                 placeholder="Email Address"
                                 type="email"
                                 value={email}
@@ -134,7 +134,7 @@ export default function LoginPage() {
 
                         <div className="relative group">
                             <input
-                                className="w-full px-6 py-4 bg-white border-2 border-lofi-black rounded-full focus:ring-4 focus:ring-lofi-yellow/20 outline-none text-lofi-black text-lg font-medium placeholder:text-lofi-grey transition-all"
+                                className="w-full px-6 py-4 bg-lofi-card border-2 border-lofi-text rounded-full focus:ring-4 focus:ring-lofi-yellow/20 outline-none text-lofi-text text-lg font-medium placeholder:text-lofi-grey transition-all"
                                 placeholder="Password"
                                 type={showPassword ? "text" : "password"}
                                 value={password}
@@ -144,7 +144,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-5 top-1/2 -translate-y-1/2 text-lofi-black opacity-60 hover:opacity-100 transition-opacity"
+                                className="absolute right-5 top-1/2 -translate-y-1/2 text-lofi-text opacity-60 hover:opacity-100 transition-opacity"
                             >
                                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                             </button>
@@ -165,7 +165,7 @@ export default function LoginPage() {
                             disabled={loading}
                             whileHover={{ scale: 1.02, y: -2 }}
                             whileTap={{ scale: 0.98, y: 0 }}
-                            className="w-full bg-lofi-yellow border-[3px] border-lofi-black shadow-[4px_4px_0px_0px_#1A1A1A] hover:shadow-[6px_6px_0px_0px_#1A1A1A] text-lofi-black font-display font-black py-4 rounded-full transition-all text-xl mt-4 flex items-center justify-center gap-2"
+                            className="w-full bg-lofi-yellow border-[3px] border-lofi-text lofi-shadow hover:translate-y-[-2px] text-lofi-black font-display font-black py-4 rounded-full transition-all text-xl mt-4 flex items-center justify-center gap-2"
                         >
                             {loading ? (
                                 <Loader2 className="w-6 h-6 animate-spin" />
@@ -178,16 +178,16 @@ export default function LoginPage() {
                     {/* Footer Auth Navigation */}
                     <div className="mt-auto mb-10">
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="h-[1.5px] flex-1 bg-lofi-black opacity-20"></div>
-                            <span className="text-lofi-black opacity-40 text-[10px] font-black uppercase tracking-[0.2em]">Or continue with</span>
-                            <div className="h-[1.5px] flex-1 bg-lofi-black opacity-20"></div>
+                            <div className="h-[1.5px] flex-1 bg-lofi-text opacity-20"></div>
+                            <span className="text-lofi-text opacity-40 text-[10px] font-black uppercase tracking-[0.2em]">Or continue with</span>
+                            <div className="h-[1.5px] flex-1 bg-lofi-text opacity-20"></div>
                         </div>
 
                         <div className="flex justify-center gap-6">
                             <motion.button
                                 whileHover={{ y: -2 }}
                                 onClick={handleGoogleLogin}
-                                className="w-14 h-14 rounded-full border-2 border-lofi-black flex items-center justify-center bg-white/50 hover:bg-white transition-colors"
+                                className="w-14 h-14 rounded-full border-2 border-lofi-text flex items-center justify-center bg-lofi-card/50 hover:bg-lofi-card transition-colors"
                             >
                                 <svg className="h-6 w-6" viewBox="0 0 24 24">
                                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -198,7 +198,7 @@ export default function LoginPage() {
                             </motion.button>
                         </div>
 
-                        <p className="text-center mt-8 text-lofi-black text-sm font-medium">
+                        <p className="text-center mt-8 text-lofi-text text-sm font-medium">
                             {isSignUp ? "Already a sprout?" : "New to the garden?"}{" "}
                             <button
                                 onClick={() => setIsSignUp(!isSignUp)}
@@ -212,7 +212,7 @@ export default function LoginPage() {
 
                 {/* Home Indicator Decor */}
                 <div className="flex justify-center pb-4">
-                    <div className="w-32 h-1.5 bg-lofi-black rounded-full opacity-10"></div>
+                    <div className="w-32 h-1.5 bg-lofi-text rounded-full opacity-10"></div>
                 </div>
             </motion.div>
         </div>

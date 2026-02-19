@@ -19,7 +19,7 @@ export function MobileNav() {
 
     return (
         <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[400px]">
-            <nav className="bg-white lofi-border rounded-[2rem] px-4 py-3 flex justify-between items-center lofi-shadow border-4">
+            <nav className="bg-lofi-card lofi-border rounded-[2rem] px-4 py-3 flex justify-between items-center lofi-shadow border-4 transition-colors duration-300">
                 {navItems.map((item) => {
                     const isActive = pathname === item.href
                     return (
@@ -28,7 +28,7 @@ export function MobileNav() {
                             href={item.locked ? "#" : item.href}
                             className={cn(
                                 "relative p-3 rounded-2xl transition-all",
-                                isActive ? "bg-lofi-black text-white" : "text-lofi-black hover:bg-slate-50",
+                                isActive ? "bg-lofi-text text-lofi-bg" : "text-lofi-text hover:bg-lofi-grey",
                                 item.locked && "opacity-40 grayscale pointer-events-none"
                             )}
                         >
@@ -36,7 +36,7 @@ export function MobileNav() {
                             {isActive && (
                                 <motion.div
                                     layoutId="mobile-nav-active"
-                                    className="absolute -top-1 -right-1 w-2 h-2 bg-lofi-yellow rounded-full border border-lofi-black"
+                                    className="absolute -top-1 -right-1 w-2 h-2 bg-lofi-yellow rounded-full lofi-border"
                                 />
                             )}
                         </Link>

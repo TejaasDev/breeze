@@ -35,6 +35,10 @@
   --color-lofi-yellow: var(--lofi-yellow);
   --color-lofi-black: var(--lofi-black);
   --color-lofi-grey: var(--lofi-grey);
+  --color-lofi-bg: var(--lofi-bg);
+  --color-lofi-text: var(--lofi-text);
+  --color-lofi-border: var(--lofi-border);
+  --color-lofi-card: var(--lofi-card-bg);
   --color-mint-green: #D1E8E2;
   --color-pastel-pink: #FFD6E0;
   --color-pastel-yellow: #FFF9C4;
@@ -92,6 +96,11 @@
   --lofi-black: #1A1A1A;
   --lofi-grey: #D1D1CB;
   --grid-color: #E5E5DE;
+
+  --lofi-border: var(--lofi-black);
+  --lofi-bg: var(--lofi-cream);
+  --lofi-text: var(--lofi-black);
+  --lofi-card-bg: #FFFFFF;
 }
 
 .dark {
@@ -137,6 +146,18 @@
   --input: #1E293B;
   --ring: #475569;
   /* slate-600 */
+
+  /* Lo-Fi Dark Variables */
+  --lofi-cream: #0A0A0A;
+  --lofi-yellow: #FFD700;
+  --lofi-black: #F8FAFC;
+  --lofi-grey: #262626;
+  --grid-color: #1A1A1A;
+
+  --lofi-border: #F8FAFC;
+  --lofi-bg: #0A0A0A;
+  --lofi-text: #F8FAFC;
+  --lofi-card-bg: #141414;
 }
 
 body {
@@ -159,7 +180,7 @@ h6 {
 
 /* Lo-Fi Utilities */
 .grid-background {
-  background-color: var(--lofi-cream);
+  background-color: var(--lofi-bg);
   background-image:
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
@@ -167,16 +188,16 @@ h6 {
 }
 
 .stamp-border {
-  border: 2px solid var(--lofi-black);
-  box-shadow: 4px 4px 0px 0px var(--lofi-black);
+  border: 2px solid var(--lofi-border);
+  box-shadow: 4px 4px 0px 0px var(--lofi-border);
 }
 
 .lofi-border {
-  border: 2.5px solid var(--lofi-black);
+  border: 2.5px solid var(--lofi-border);
 }
 
 .lofi-shadow {
-  box-shadow: 4px 4px 0px 0px var(--lofi-black);
+  box-shadow: 4px 4px 0px 0px var(--lofi-border);
 }
 
 .stamp-icon {
@@ -191,9 +212,8 @@ h6 {
 
 
 .dark .grid-background {
-  background-color: #1a1a1a;
+  background-color: var(--lofi-bg);
   background-image:
-    linear-gradient(#2a2a2a 1px, transparent 1px),
-    linear-gradient(90deg, #2a2a2a 1px, transparent 1px);
-  --grid-color: #2a2a2a;
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
 }

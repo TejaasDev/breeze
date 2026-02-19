@@ -26,9 +26,9 @@ export function Sidebar() {
     const pathname = usePathname()
 
     return (
-        <aside className="hidden md:flex flex-col w-72 bg-lofi-cream border-r-4 border-lofi-black h-screen sticky top-0 font-space-grotesk grid-background">
+        <aside className="hidden md:flex flex-col w-72 bg-lofi-bg border-r-4 border-lofi-border h-screen sticky top-0 font-space-grotesk grid-background">
             <div className="p-8 flex-1">
-                <div className="flex items-center gap-3 mb-10">
+                <div className="flex items-center gap-3 mb-10 text-lofi-text">
                     <motion.div
                         whileHover={{ rotate: -10 }}
                         className="rounded-full bg-lofi-yellow lofi-border p-2 text-lofi-black lofi-shadow"
@@ -48,18 +48,18 @@ export function Sidebar() {
                                 className={cn(
                                     "flex items-center gap-4 px-5 py-4 rounded-2xl text-sm font-bold uppercase transition-all lofi-border",
                                     isActive
-                                        ? "bg-lofi-black text-white lofi-shadow translate-y-[-2px]"
-                                        : "bg-white text-lofi-black hover:bg-slate-50",
+                                        ? "bg-lofi-text text-lofi-bg lofi-shadow translate-y-[-2px]"
+                                        : "bg-lofi-card text-lofi-text hover:bg-lofi-grey",
                                     item.locked && "opacity-40 cursor-not-allowed grayscale"
                                 )}
                             >
                                 <div className={cn(
                                     "stamp-icon",
-                                    isActive ? "border-white" : "border-lofi-black"
+                                    isActive ? "border-current" : "border-lofi-border text-lofi-text"
                                 )}>
                                     <item.icon className="h-5 w-5" />
                                 </div>
-                                <span className={cn(isActive ? "text-white" : "text-lofi-black")}>
+                                <span className={cn(isActive ? "text-lofi-bg" : "text-lofi-text")}>
                                     {item.label}
                                 </span>
                                 {item.locked && (
@@ -73,9 +73,9 @@ export function Sidebar() {
                 </nav>
             </div>
 
-            <div className="p-8 border-t-4 border-lofi-black bg-white/50 backdrop-blur-sm">
+            <div className="p-8 border-t-4 border-lofi-border bg-lofi-card/50 backdrop-blur-sm text-lofi-text">
                 <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full lofi-border bg-pastel-pink lofi-shadow flex items-center justify-center text-sm font-black text-lofi-black">
+                    <div className="h-12 w-12 rounded-full lofi-border bg-pastel-pink lofi-shadow flex items-center justify-center text-sm font-black text-black">
                         P
                     </div>
                     <div className="flex-1 overflow-hidden">

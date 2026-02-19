@@ -27,13 +27,13 @@ const features = [
 
 export function Features() {
     return (
-        <section id="features" className="py-24 bg-lofi-cream grid-background font-space-grotesk border-t-8 border-lofi-black">
+        <section id="features" className="py-24 bg-lofi-bg grid-background font-space-grotesk border-t-8 border-lofi-border">
             <div className="container px-6 md:px-12">
                 <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
-                    <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">
+                    <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-lofi-text">
                         A structured path <br /> to self-trust.
                     </h2>
-                    <p className="text-lg font-medium opacity-70">
+                    <p className="text-lg font-medium opacity-70 text-lofi-text">
                         Breeze doesn't just listen. It pushes you gently into the real world.
                     </p>
                 </div>
@@ -46,7 +46,7 @@ export function Features() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                             viewport={{ once: true }}
-                            className="bg-white lofi-border p-8 rounded-[2.5rem] lofi-shadow group hover:-translate-y-2 transition-transform"
+                            className="bg-lofi-card lofi-border p-8 rounded-[2.5rem] lofi-shadow group hover:-translate-y-2 transition-transform"
                         >
                             <div className={cn(
                                 "w-16 h-16 rounded-2xl lofi-border flex items-center justify-center mb-8 lofi-shadow transition-transform group-hover:rotate-6",
@@ -54,10 +54,10 @@ export function Features() {
                             )}>
                                 <feature.icon className="h-8 w-8 text-black" />
                             </div>
-                            <h3 className="text-2xl font-black uppercase mb-4 tracking-tight italic">
+                            <h3 className="text-2xl font-black uppercase mb-4 tracking-tight italic text-lofi-text">
                                 {feature.title}
                             </h3>
-                            <p className="text-base font-medium opacity-70 leading-tight">
+                            <p className="text-base font-medium opacity-70 leading-tight text-lofi-text">
                                 {feature.description}
                             </p>
                         </motion.div>
