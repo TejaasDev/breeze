@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Wind } from "lucide-react"
 import { motion } from "framer-motion"
