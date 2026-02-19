@@ -20,7 +20,7 @@ export function Hero() {
                         Confidence Unleashed
                     </div>
 
-                    <h1 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter text-lofi-text uppercase leading-[0.9]">
+                    <h1 className="text-3xl sm:text-5xl md:text-8xl font-black tracking-tighter text-lofi-text uppercase leading-[0.9]">
                         Grow <span className="italic">Quietly.</span> <br />
                         <span className="text-white drop-shadow-[2px_2px_0px_#1A1A1A] dark:text-lofi-black dark:drop-shadow-[2px_2px_0px_#FFFFFF]">Rise Loudly.</span>
                     </h1>

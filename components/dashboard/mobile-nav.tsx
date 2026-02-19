@@ -19,7 +19,7 @@ export function MobileNav() {
 
     return (
         <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[400px]">
-            <nav className="bg-lofi-card lofi-border rounded-[2rem] px-4 py-3 flex justify-between items-center lofi-shadow border-4 transition-colors duration-300">
+            <nav className="bg-lofi-card lofi-border rounded-[2rem] px-4 py-2 flex justify-between items-center lofi-shadow border-2 transition-colors duration-300">
                 {navItems.map((item) => {
                     const isActive = pathname === item.href
                     return (

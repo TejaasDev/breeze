@@ -50,22 +50,22 @@ export function Navbar() {
         <>
             <motion.header
                 className={cn(
-                    "fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 md:px-8 py-4 transition-all duration-300 w-[92%] md:w-[90%] max-w-7xl rounded-2xl font-space-grotesk",
-                    scrolled ? "bg-lofi-bg lofi-border lofi-shadow border-4" : "bg-lofi-bg/50 backdrop-blur-sm lofi-border border-4"
+                    "fixed top-4 left-0 right-0 mx-auto z-50 flex items-center justify-between px-4 md:px-8 py-3 transition-all duration-300 w-[92%] max-w-7xl rounded-2xl font-space-grotesk",
+                    scrolled ? "bg-lofi-bg lofi-border lofi-shadow border-4" : "bg-lofi-bg/80 backdrop-blur-md lofi-border border-4"
                 )}
-                initial={{ y: -100, x: "-50%" }}
-                animate={{ y: 0, x: "-50%" }}
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
             >
                 <div className="flex items-center gap-2">
-                    <Link href="/" className="flex items-center gap-3">
+                    <Link href="/" className="flex items-center gap-2">
                         <motion.div
                             whileHover={{ rotate: 10 }}
-                            className="rounded-full bg-lofi-yellow lofi-border p-1.5 text-lofi-black"
+                            className="rounded-full bg-lofi-yellow lofi-border p-1 text-lofi-black"
                         >
-                            <Wind className="h-5 w-5" />
+                            <Wind className="h-4 w-4 md:h-5 md:w-5" />
                         </motion.div>
-                        <span className="text-xl font-black uppercase italic tracking-tight text-lofi-text">
+                        <span className="text-lg md:text-xl font-black uppercase italic tracking-tight text-lofi-text">
                             Breeze
                         </span>
                     </Link>
@@ -80,7 +80,7 @@ export function Navbar() {
                     </Link>
                 </nav>
 
-                <div className="flex items-center gap-2 md:gap-4">
+                <div className="flex items-center gap-1 md:gap-4">
                     <div className="hidden sm:flex items-center gap-4">
                         {user ? (
                             <>
@@ -117,6 +117,7 @@ export function Navbar() {
                     <button
                         className="md:hidden p-2 text-lofi-text hover:bg-lofi-grey rounded-lg transition-colors"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label="Toggle Menu"
                     >
                         {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
@@ -127,22 +128,30 @@ export function Navbar() {
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="fixed inset-0 z-40 md:hidden bg-lofi-bg flex flex-col items-center justify-center p-6 pt-24 font-space-grotesk"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[60] bg-lofi-bg grid-background flex flex-col items-center justify-center p-6 font-space-grotesk"
                     >
-                        <nav className="flex flex-col items-center gap-8 mb-12">
+                        {/* Custom Close Button in Overlay */}
+                        <button
+                            className="absolute top-8 right-8 p-3 bg-lofi-card lofi-border rounded-full lofi-shadow"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            <X className="h-8 w-8 text-lofi-text" />
+                        </button>
+
+                        <nav className="flex flex-col items-center gap-8 mb-16">
                             <Link
                                 href="/#features"
-                                className="text-3xl font-black uppercase italic tracking-tighter text-lofi-text hover:text-lofi-yellow transition-colors"
+                                className="text-4xl font-black uppercase italic tracking-tighter text-lofi-text hover:text-lofi-yellow transition-colors"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Features
                             </Link>
                             <Link
                                 href="/#philosophy"
-                                className="text-3xl font-black uppercase italic tracking-tighter text-lofi-text hover:text-lofi-yellow transition-colors"
+                                className="text-4xl font-black uppercase italic tracking-tighter text-lofi-text hover:text-lofi-yellow transition-colors"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Why us?
@@ -150,7 +159,7 @@ export function Navbar() {
                             {user && (
                                 <Link
                                     href="/dashboard"
-                                    className="text-3xl font-black uppercase italic tracking-tighter text-lofi-text hover:text-lofi-yellow transition-colors"
+                                    className="text-4xl font-black uppercase italic tracking-tighter text-lofi-text hover:text-lofi-yellow transition-colors"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     Dashboard

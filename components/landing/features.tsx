@@ -30,7 +30,7 @@ export function Features() {
         <section id="features" className="py-24 bg-lofi-bg grid-background font-space-grotesk border-t-8 border-lofi-border">
             <div className="container px-6 md:px-12">
                 <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
-                    <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-lofi-text">
+                    <h2 className="text-3xl md:text-6xl font-black uppercase italic tracking-tighter text-lofi-text">
                         A structured path <br /> to self-trust.
                     </h2>
                     <p className="text-lg font-medium opacity-70 text-lofi-text">
