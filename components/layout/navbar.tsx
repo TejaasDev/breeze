@@ -5,7 +5,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import { Wind } from "lucide-react"
 
 import { createClient } from "@/lib/supabase-browser"
@@ -48,33 +47,33 @@ export function Navbar() {
     return (
         <motion.header
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 md:px-12",
-                scrolled ? "bg-background/80 backdrop-blur-md border-b" : "bg-transparent"
+                "fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-8 py-4 transition-all duration-300 w-[90%] max-w-7xl rounded-2xl font-space-grotesk",
+                scrolled ? "bg-white lofi-border lofi-shadow border-4" : "bg-white/50 backdrop-blur-sm lofi-border border-4"
             )}
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
+            initial={{ y: -100, x: "-50%" }}
+            animate={{ y: 0, x: "-50%" }}
             transition={{ duration: 0.5 }}
         >
             <div className="flex items-center gap-2">
-                <Link href="/" className="flex items-center gap-2">
-                    <div className="rounded-full bg-primary/10 p-2 text-primary">
+                <Link href="/" className="flex items-center gap-3">
+                    <motion.div
+                        whileHover={{ rotate: 10 }}
+                        className="rounded-full bg-lofi-yellow lofi-border p-1.5 text-lofi-black"
+                    >
                         <Wind className="h-5 w-5" />
-                    </div>
-                    <span className="font-heading text-xl font-bold tracking-tight text-foreground">
+                    </motion.div>
+                    <span className="text-xl font-black uppercase italic tracking-tight text-lofi-black">
                         Breeze
                     </span>
                 </Link>
             </div>
 
             <nav className="hidden md:flex items-center gap-8">
-                <Link href="/#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                    How it Works
+                <Link href="/#features" className="text-xs font-black uppercase tracking-widest text-lofi-black/60 hover:text-lofi-black transition-colors">
+                    Features
                 </Link>
-                <Link href="/#philosophy" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                    Philosophy
-                </Link>
-                <Link href="/#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                    Membership
+                <Link href="/#philosophy" className="text-xs font-black uppercase tracking-widest text-lofi-black/60 hover:text-lofi-black transition-colors">
+                    Why us?
                 </Link>
             </nav>
 
@@ -82,25 +81,28 @@ export function Navbar() {
                 {user ? (
                     <>
                         <Link href="/dashboard">
-                            <Button variant="ghost" className="hidden sm:inline-flex">
+                            <button className="hidden sm:inline-flex text-xs font-black uppercase tracking-widest px-4 py-2 hover:underline decoration-2 underline-offset-4">
                                 Dashboard
-                            </Button>
+                            </button>
                         </Link>
-                        <Button variant="outline" onClick={handleLogout} className="hidden sm:inline-flex">
+                        <button
+                            onClick={handleLogout}
+                            className="bg-lofi-black text-white px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest lofi-shadow hover:translate-y-[-2px] transition-transform"
+                        >
                             Logout
-                        </Button>
+                        </button>
                     </>
                 ) : (
                     <>
                         <Link href="/login">
-                            <Button variant="ghost" className="hidden sm:inline-flex">
+                            <button className="hidden sm:inline-flex text-xs font-black uppercase tracking-widest px-4 py-2 hover:underline decoration-2 underline-offset-4">
                                 Login
-                            </Button>
+                            </button>
                         </Link>
-                        <Link href="/onboarding">
-                            <Button variant="calm">
-                                Start Journey
-                            </Button>
+                        <Link href="/login">
+                            <button className="bg-lofi-yellow text-lofi-black lofi-border px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest lofi-shadow hover:translate-y-[-2px] transition-transform">
+                                JOIN NOW
+                            </button>
                         </Link>
                     </>
                 )}

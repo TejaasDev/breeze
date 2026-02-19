@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Outfit, Inter, Poppins, Quicksand, Space_Grotesk, Gaegu } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 
@@ -11,6 +11,29 @@ const outfit = Outfit({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const quicksand = Quicksand({
+  variable: "--font-quicksand",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+});
+
+const gaegu = Gaegu({
+  variable: "--font-gaegu",
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${inter.variable} antialiased`}
+        className={`${outfit.variable} ${inter.variable} ${poppins.variable} ${quicksand.variable} ${spaceGrotesk.variable} ${gaegu.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

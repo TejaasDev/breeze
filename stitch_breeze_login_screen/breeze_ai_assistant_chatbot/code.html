@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Breeze AI Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FFD447",
+              "background-light": "#F9F9F2",
+              "background-dark": "#121212",
+              "chat-bubble-dark": "#333333",
+              "chat-bubble-light": "#FFFFFF",
+              "container-dark": "#444444",
+            },
+            fontFamily: {
+              display: ["Poppins", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "24px",
+            },
+          },
+        },
+      };
+    </script>
+<style type="text/tailwindcss">
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+      .grid-bg {
+        background-image: radial-gradient(#d1d1cc 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .dark .grid-bg {
+        background-image: radial-gradient(#333333 1px, transparent 1px);
+      }
+      .stamp-border {
+        mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L10,5 L20,0 L30,5 L40,0 L50,5 L60,0 L70,5 L80,0 L90,5 L100,0 L95,10 L100,20 L95,30 L100,40 L95,50 L100,60 L95,70 L100,80 L95,90 L100,100 L90,95 L80,100 L70,95 L60,100 L50,95 L40,100 L30,95 L20,100 L10,95 L0,100 L5,90 L0,80 L5,70 L0,60 L5,50 L0,40 L5,30 L0,20 L5,10 Z' fill='black'/%3E%3C/svg%3E");
+        mask-size: cover;
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L10,5 L20,0 L30,5 L40,0 L50,5 L60,0 L70,5 L80,0 L90,5 L100,0 L95,10 L100,20 L95,30 L100,40 L95,50 L100,60 L95,70 L100,80 L95,90 L100,100 L90,95 L80,100 L70,95 L60,100 L50,95 L40,100 L30,95 L20,100 L10,95 L0,100 L5,90 L0,80 L5,70 L0,60 L5,50 L0,40 L5,30 L0,20 L5,10 Z' fill='black'/%3E%3C/svg%3E");
+        -webkit-mask-size: cover;
+      }
+      .robot-stamp {
+        background-color: #F9F9F2;
+        border: 2px solid #333333;
+        position: relative;
+        overflow: hidden;
+      }
+      .robot-illustration {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex justify-center items-center overflow-hidden">
+<div class="w-full max-w-[430px] h-[932px] bg-background-light dark:bg-background-dark relative flex flex-col shadow-2xl grid-bg">
+<header class="pt-12 pb-4 px-6 flex flex-col items-center relative">
+<div class="flex items-center justify-between w-full mb-1">
+<button class="p-2 -ml-2 text-black dark:text-white">
+<span class="material-symbols-outlined text-3xl">arrow_back</span>
+</button>
+<h1 class="text-2xl font-bold text-black dark:text-white">Breeze AI</h1>
+<button class="p-2 -mr-2 text-black dark:text-white">
+<span class="material-symbols-outlined text-3xl">account_circle</span>
+</button>
+</div>
+<div class="bg-black text-white dark:bg-white dark:text-black px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+<span>Online</span>
+<span class="w-2 h-2 bg-green-400 rounded-full"></span>
+</div>
+</header>
+<div class="flex-1 px-4 mb-32">
+<div class="bg-container-dark dark:bg-zinc-800 w-full h-full rounded-[40px] p-6 flex flex-col gap-6 overflow-y-auto shadow-inner">
+<div class="flex flex-col gap-2">
+<div class="bg-chat-bubble-dark text-white rounded-[24px] p-4 flex items-center gap-4 max-w-[90%] border border-zinc-700">
+<div class="w-14 h-14 bg-white stamp-border flex items-center justify-center p-1 shrink-0">
+<div class="w-full h-full robot-stamp border-2 border-black flex items-center justify-center relative p-1.5">
+<div class="w-full h-full border border-black/80 flex flex-col items-center justify-center relative bg-transparent">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 flex flex-col items-center">
+<div class="w-1 h-1 bg-black rounded-full"></div>
+<div class="w-0.5 h-2 bg-black"></div>
+</div>
+<div class="w-[85%] h-[70%] border-2 border-black rounded-md flex flex-col items-center justify-center gap-1 mt-1 bg-transparent">
+<div class="flex justify-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full border-2 border-black"></div>
+<div class="w-2.5 h-2.5 rounded-full border-2 border-black"></div>
+</div>
+<div class="w-5 h-2 border-2 border-black flex justify-between px-0.5 mt-0.5">
+<div class="w-px h-full bg-black"></div>
+<div class="w-px h-full bg-black"></div>
+<div class="w-px h-full bg-black"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="text-[15px] leading-tight font-medium">
+                        Hii 👋 my name is Miku. I'm here to help you. 💬
+                    </p>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="bg-white text-black rounded-[30px] px-5 py-4 max-w-[80%] shadow-md">
+<p class="text-[15px] font-medium leading-snug">
+                        What are the top trending collaborating interface design tools 2023
+                    </p>
+</div>
+</div>
+<div class="flex">
+<div class="bg-chat-bubble-dark text-white rounded-[24px] p-5 max-w-[95%] border border-zinc-700">
+<p class="text-[15px] leading-relaxed">
+                        Sure! Popular tools include Figma, Mural, Miro, Adobe XD (with Coedit), and Overflow. Many integrate with platforms Slack and Notion for enhanced team workflows.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-8 left-0 w-full px-6 flex flex-col gap-4">
+<div class="flex justify-between items-center w-full">
+<button class="w-14 h-14 bg-white dark:bg-zinc-700 rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-black dark:text-white text-2xl">keyboard</span>
+</button>
+<button class="w-14 h-14 bg-white dark:bg-zinc-700 rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-black dark:text-white text-2xl">close</span>
+</button>
+</div>
+<div class="relative flex items-center">
+<div class="w-full bg-white dark:bg-zinc-800 rounded-full py-5 px-6 pr-16 shadow-xl border border-gray-100 dark:border-zinc-700">
+<span class="text-gray-400 dark:text-gray-500 font-medium">Type your message...</span>
+</div>
+<button class="absolute right-2 w-12 h-12 bg-primary text-black rounded-full flex items-center justify-center shadow-md hover:brightness-105 transition-all">
+<span class="material-symbols-outlined font-bold">add</span>
+</button>
+</div>
+</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-black/10 dark:bg-white/10 rounded-full"></div>
+</div>
+
+</body></html>

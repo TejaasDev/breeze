@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Breeze AI - Speech Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FFC93C", // The yellow from the pill button
+                        "background-light": "#F8F5E9", // Cream off-white
+                        "background-dark": "#1A1A1A",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        handwritten: ["Permanent Marker", "cursive"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "24px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .dark .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+        }.sketch-border {
+            border: 2px solid #000;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gray-100 dark:bg-black flex items-center justify-center min-h-screen font-display">
+<div class="relative w-[375px] h-[812px] bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden rounded-[60px] border-[8px] border-black">
+<div class="absolute top-0 w-full h-10 flex justify-center items-end pb-2 z-50">
+<div class="w-28 h-7 bg-black rounded-3xl"></div>
+</div>
+<div class="absolute inset-0 grid-bg pointer-events-none"></div>
+<div class="relative h-full flex flex-col pt-12 pb-10 px-6">
+<header class="flex flex-col items-center">
+<div class="w-full flex justify-between items-center mb-1 px-2">
+<button class="text-gray-900 dark:text-gray-100 p-2">
+<span class="material-icons-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<h1 class="text-lg font-semibold text-gray-900 dark:text-gray-100">AI Assistant</h1>
+<button class="text-gray-900 dark:text-gray-100 p-2">
+<span class="material-icons-outlined text-2xl">person_outline</span>
+</button>
+</div>
+<div class="bg-black text-white px-3 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-medium tracking-wide">
+<div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                    Online
+                </div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center -mt-8">
+<div class="relative w-full aspect-square max-w-[280px]">
+<img alt="A hand-drawn black-and-white robot holding a heart" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal dark:invert brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5NtqOPLXyC-6-QBNNtVAXP921CF5FgXhfEzAZWZK6HL5b16PJPnI0_VUDSdR82jsqwX31xf8tvNTmzU4fqS32r9Hjb9E-Rp9-4fHbYk7XnoX1h1_F9mxTcn_b1RqIQvCyILWPLlZAMRAYqDYOe9b3EAkIn90F-QxrVf6IT6VRix2ErJduEcqI-J21xzpL1IfAavbQ1MJx5twKkK6r3Og5svJBmL-vsydlfmSeoygFNLIZuqd6OXzKiJ-9vLvBDqGAq2DkaGCOVn4"/>
+</div>
+<div class="mt-8 px-6 text-center">
+<p class="text-[17px] leading-relaxed text-gray-800 dark:text-gray-200 font-medium">
+                        Hii 👋 my name is Miku. I'm here to help you. 💬
+                    </p>
+</div>
+</main>
+<footer class="flex items-center justify-between gap-4 mt-auto">
+<button class="w-12 h-12 bg-black dark:bg-gray-800 flex items-center justify-center rounded-full transition-transform active:scale-90 shadow-lg">
+<span class="material-icons-outlined text-white text-xl">keyboard</span>
+</button>
+<button class="flex-grow h-14 bg-primary rounded-full flex items-center justify-end pr-1.5 transition-transform active:scale-[0.98] shadow-lg">
+<div class="w-11 h-11 bg-black flex items-center justify-center rounded-full mr-1">
+<span class="material-icons-outlined text-white translate-x-0.5">play_arrow</span>
+</div>
+</button>
+<button class="w-12 h-12 bg-black dark:bg-gray-800 flex items-center justify-center rounded-full transition-transform active:scale-90 shadow-lg">
+<span class="material-icons-outlined text-white text-xl">close</span>
+</button>
+</footer>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+</div>
+</div>
+<div class="fixed bottom-4 right-4 flex gap-2">
+<button class="p-3 bg-white dark:bg-zinc-800 rounded-full shadow-xl border border-gray-200 dark:border-zinc-700" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-outlined dark:text-white">dark_mode</span>
+</button>
+</div>
+
+</body></html>

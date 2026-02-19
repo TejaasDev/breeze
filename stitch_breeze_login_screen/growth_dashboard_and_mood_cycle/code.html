@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Breeze - Lo-Fi Growth Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Gaegu:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --cream-bg: #F9F9F2;
+            --mint-green: #D1E8E2;
+            --pastel-pink: #FFD6E0;
+            --pastel-yellow: #FFF9C4;
+            --dark-grey: #2D2D2D;
+            --grid-line: #E8E8E0;
+        }
+        body {
+            background-color: var(--cream-bg);
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #1a1a1a;
+        }
+        .stamp-icon {
+            font-family: 'Material Symbols Outlined';
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+            border: 2px solid currentColor;
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .hand-drawn {
+            font-family: 'Gaegu', cursive;
+        }
+        .lofi-border {
+            border: 2.5px solid #1a1a1a;
+        }
+        .lofi-shadow {
+            box-shadow: 4px 4px 0px 0px #1a1a1a;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .nav-shadow {
+            box-shadow: 0px 4px 0px 0px #1a1a1a;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-40">
+<header class="px-6 pt-8 pb-4 flex justify-between items-center">
+<div>
+<h1 class="text-3xl font-bold tracking-tight uppercase italic">Breeze</h1>
+<p class="text-sm font-medium opacity-70">AI Growth Companion</p>
+</div>
+<button class="w-12 h-12 bg-white lofi-border rounded-full flex items-center justify-center lofi-shadow">
+<span class="material-symbols-outlined text-black">notifications</span>
+</button>
+</header>
+<main class="px-6 space-y-6">
+<section class="mt-4">
+<div class="bg-[var(--mint-green)] lofi-border rounded-[30px] p-8 lofi-shadow relative overflow-hidden">
+<div class="flex flex-col items-center text-center relative z-10">
+<div class="relative mb-6">
+<div class="w-36 h-36 bg-white lofi-border rounded-full p-1 overflow-hidden">
+<img alt="3D Avatar" class="w-full h-full rounded-full object-cover grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgGlIbb8gAgLLiCBxP23t8fTIq4hS0pHNhFmbN2cy_sa1otDlc-olTCEI_1ziZLdR1bwnmDMYZvV6IW1Yv3KvMDgbkYOYqtYjK3orqTYMsUD-GYOq2QRCKABEsBgl7dCEdOV831OxFSMtsCCAGFQRn_xMhMqweGzKhd4ycDg2m2ggIliMTwQMVdza4qCwevpVon7L2L9Sy3EIJB7aU8zI8Nij6kZZcr2jRfca_-OnzdIxmXWy6nzj5xrzlXjc1T8OPII8n8BKwync"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-white lofi-border px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest lofi-shadow">
+                            LVL 14
+                        </div>
+</div>
+<h2 class="text-3xl font-bold uppercase mb-1">Bloom Status</h2>
+<p class="text-sm font-medium mb-6 italic">Growing 15% faster this week!</p>
+<div class="w-full bg-white/50 lofi-border h-6 rounded-full overflow-hidden mb-2">
+<div class="bg-[#1a1a1a] h-full w-[68%]"></div>
+</div>
+<div class="flex justify-between w-full text-[10px] font-bold uppercase tracking-tighter">
+<span>Seedling</span>
+<span>Sprout</span>
+</div>
+</div>
+<div class="absolute top-4 right-4 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-6xl">potted_plant</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-[var(--pastel-pink)] lofi-border p-5 rounded-[24px] lofi-shadow flex flex-col items-start gap-2">
+<span class="material-symbols-outlined text-3xl stamp-icon">favorite</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-wider mb-1">Confidence</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-bold">84</span>
+<span class="text-xs font-bold hand-drawn">+4%</span>
+</div>
+</div>
+</div>
+<div class="bg-[var(--pastel-yellow)] lofi-border p-5 rounded-[24px] lofi-shadow flex flex-col items-start gap-2">
+<span class="material-symbols-outlined text-3xl stamp-icon">local_fire_department</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-wider mb-1">Streak</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-bold">12</span>
+<span class="text-xs font-bold hand-drawn">days</span>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-xl font-bold uppercase italic">Mood Cycle</h3>
+<div class="flex bg-white lofi-border p-1 rounded-xl text-[10px] font-bold uppercase">
+<button class="px-3 py-1 bg-black text-white rounded-lg">Wk</button>
+<button class="px-3 py-1">Mo</button>
+<button class="px-3 py-1">Yr</button>
+</div>
+</div>
+<div class="bg-[var(--dark-grey)] lofi-border p-6 rounded-[30px] lofi-shadow relative h-48 flex items-center justify-center overflow-hidden">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 400 150">
+<path class="opacity-90" d="M0,80 C50,50 100,120 150,70 C200,20 250,90 300,60 C350,30 400,80 400,80" fill="none" stroke="white" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="150" cy="70" fill="white" r="6"></circle>
+</svg>
+<div class="absolute bottom-4 left-6 right-6 flex justify-between text-[10px] font-bold text-white/50 uppercase">
+<span>Mon</span>
+<span>Wed</span>
+<span>Fri</span>
+<span>Sun</span>
+</div>
+</div>
+</section>
+<section>
+<div class="bg-white lofi-border p-6 rounded-[24px] lofi-shadow flex gap-4 items-start">
+<div class="shrink-0">
+<span class="material-symbols-outlined text-3xl stamp-icon bg-[var(--mint-green)]">lightbulb</span>
+</div>
+<div>
+<h4 class="font-bold uppercase text-sm mb-1">The Morning Boost</h4>
+<p class="text-sm font-medium leading-tight opacity-80">Users in your circle reported 20% higher confidence after a reflection.</p>
+<button class="mt-3 text-xs font-bold uppercase underline decoration-2 underline-offset-4">Try Reflection</button>
+</div>
+</div>
+</section>
+<section>
+<h3 class="text-xl font-bold uppercase italic mb-4">Vibe Gallery</h3>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-6 px-6">
+<div class="min-w-[110px] aspect-square bg-white lofi-border rounded-2xl p-4 flex flex-col justify-between lofi-shadow rotate-[-2deg]">
+<span class="material-symbols-outlined text-2xl stamp-icon self-start">wb_sunny</span>
+<span class="text-xs font-bold uppercase tracking-tighter">Radiant</span>
+</div>
+<div class="min-w-[110px] aspect-square bg-white lofi-border rounded-2xl p-4 flex flex-col justify-between lofi-shadow rotate-[1deg]">
+<span class="material-symbols-outlined text-2xl stamp-icon self-start">eco</span>
+<span class="text-xs font-bold uppercase tracking-tighter">Peaceful</span>
+</div>
+<div class="min-w-[110px] aspect-square bg-white lofi-border rounded-2xl p-4 flex flex-col justify-between lofi-shadow rotate-[-1deg]">
+<span class="material-symbols-outlined text-2xl stamp-icon self-start">cyclone</span>
+<span class="text-xs font-bold uppercase tracking-tighter">Dynamic</span>
+</div>
+</div>
+</section>
+</main>
+<div class="fixed bottom-10 left-6 right-6 z-50 flex justify-center">
+<nav class="relative w-full max-w-[342px] h-14 bg-white border-[2.5px] border-[#1a1a1a] rounded-full flex items-center px-2 nav-shadow">
+<div class="flex-1 flex justify-around items-center pr-8">
+<button class="flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px] font-bold text-black" style="font-variation-settings: 'FILL' 1">grid_view</span>
+</button>
+<button class="flex items-center justify-center opacity-40">
+<span class="material-symbols-outlined text-[28px] text-black">insert_chart</span>
+</button>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 -top-6">
+<button class="w-20 h-20 bg-black rounded-full flex items-center justify-center border-[2.5px] border-[#1a1a1a] shadow-lg">
+<span class="material-symbols-outlined text-white text-4xl">add</span>
+</button>
+</div>
+<div class="flex-1 flex justify-around items-center pl-8">
+<button class="flex items-center justify-center opacity-40">
+<span class="material-symbols-outlined text-[28px] text-black">groups</span>
+</button>
+<button class="flex items-center justify-center opacity-40">
+<span class="material-symbols-outlined text-[28px] text-black">person</span>
+</button>
+</div>
+</nav>
+</div>
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+
+</body></html>

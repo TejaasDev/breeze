@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { LayoutDashboard, MessageCircle, TrendingUp, Users, Settings } from "lucide-react"
+import { motion } from "framer-motion"
 
 const navItems = [
     { href: "/dashboard", icon: LayoutDashboard },
@@ -17,24 +18,31 @@ export function MobileNav() {
     const pathname = usePathname()
 
     return (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-background/80 backdrop-blur-lg px-6 py-3 flex justify-between items-center z-50">
-            {navItems.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                    <Link
-                        key={item.href}
-                        href={item.locked ? "#" : item.href}
-                        className={cn(
-                            "flex flex-col items-center gap-1 p-2 rounded-lg transition-colors",
-                            isActive ? "text-primary" : "text-muted-foreground",
-                            item.locked && "opacity-50"
-                        )}
-                    >
-                        <item.icon className={cn("h-6 w-6", isActive && "fill-current")} />
-                        {item.locked && <span className="sr-only">Locked</span>}
-                    </Link>
-                )
-            })}
-        </nav>
+        <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[400px]">
+            <nav className="bg-white lofi-border rounded-[2rem] px-4 py-3 flex justify-between items-center lofi-shadow border-4">
+                {navItems.map((item) => {
+                    const isActive = pathname === item.href
+                    return (
+                        <Link
+                            key={item.href}
+                            href={item.locked ? "#" : item.href}
+                            className={cn(
+                                "relative p-3 rounded-2xl transition-all",
+                                isActive ? "bg-lofi-black text-white" : "text-lofi-black hover:bg-slate-50",
+                                item.locked && "opacity-40 grayscale pointer-events-none"
+                            )}
+                        >
+                            <item.icon className={cn("h-6 w-6")} />
+                            {isActive && (
+                                <motion.div
+                                    layoutId="mobile-nav-active"
+                                    className="absolute -top-1 -right-1 w-2 h-2 bg-lofi-yellow rounded-full border border-lofi-black"
+                                />
+                            )}
+                        </Link>
+                    )
+                })}
+            </nav>
+        </div>
     )
 }

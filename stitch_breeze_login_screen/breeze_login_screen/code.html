@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Breeze Login - Lo-Fi Style</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        cream: "#F9F9F2",
+                        "vibrant-yellow": "#FFD700",
+                        "lofi-black": "#1A1A1A",
+                        "lofi-grey": "#D1D1CB",
+                    },
+                    fontFamily: {
+                        sans: ["Quicksand", "sans-serif"],
+                        display: ["Poppins", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --cream: #F9F9F2;
+            --grid-color: #E5E5DE;
+        }
+        .grid-background {
+            background-color: var(--cream);
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .stamp-border {
+            border: 2px solid #1A1A1A;
+            box-shadow: 4px 4px 0px 0px #1A1A1A;
+        }
+        .hand-drawn {
+            filter: contrast(1.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
+<div class="w-full max-w-[390px] h-[844px] bg-cream rounded-[3rem] shadow-2xl overflow-hidden border-[8px] border-lofi-black relative flex flex-col grid-background">
+<div class="px-8 pt-4 pb-2 flex justify-between items-center text-sm font-bold text-lofi-black z-10">
+<span>9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[18px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<div class="absolute top-16 left-6 text-lofi-black opacity-60">
+<span class="material-symbols-outlined text-3xl">wb_sunny</span>
+</div>
+<div class="absolute top-24 right-8 text-lofi-black opacity-60">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+</div>
+<div class="absolute bottom-32 left-8 text-lofi-black opacity-40">
+<span class="material-symbols-outlined text-xl">storm</span>
+</div>
+<div class="relative h-1/4 flex flex-col items-center justify-center pt-8">
+<div class="w-24 h-24 bg-white border-2 border-lofi-black rounded-full flex items-center justify-center stamp-border">
+<span class="material-symbols-outlined text-5xl text-lofi-black">eco</span>
+</div>
+</div>
+<div class="flex-1 px-8 flex flex-col z-10">
+<div class="text-center mb-10">
+<h1 class="text-4xl font-display font-bold text-lofi-black mb-2 tracking-tight">Breeze</h1>
+<p class="text-lofi-black font-medium opacity-70">Growth Companion</p>
+</div>
+<form class="space-y-4" onsubmit="event.preventDefault()">
+<div>
+<input class="w-full px-6 py-4 bg-white border border-lofi-black rounded-full focus:ring-0 focus:border-lofi-black text-lofi-black text-lg font-medium placeholder:text-lofi-grey transition-all" placeholder="Email Address" type="email"/>
+</div>
+<div>
+<div class="relative">
+<input class="w-full px-6 py-4 bg-white border border-lofi-black rounded-full focus:ring-0 focus:border-lofi-black text-lofi-black text-lg font-medium placeholder:text-lofi-grey transition-all" placeholder="Password" type="password"/>
+<button class="absolute right-5 top-1/2 -translate-y-1/2 text-lofi-black" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<div class="text-right pr-4">
+<a class="text-sm font-semibold text-lofi-black underline" href="#">Forgot password?</a>
+</div>
+<button class="w-full bg-vibrant-yellow border-2 border-lofi-black hover:translate-y-[-2px] hover:shadow-[0_4px_0_0_#1A1A1A] text-lofi-black font-display font-bold py-4 rounded-full transition-all active:translate-y-[2px] active:shadow-none text-xl mt-4">
+                    Log In
+                </button>
+</form>
+<div class="mt-auto mb-10">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-[1px] flex-1 bg-lofi-black opacity-20"></div>
+<span class="text-lofi-black opacity-50 text-xs font-bold uppercase tracking-widest">Or Sign In With</span>
+<div class="h-[1px] flex-1 bg-lofi-black opacity-20"></div>
+</div>
+<div class="flex justify-center gap-6">
+<button class="w-12 h-12 rounded-full border border-lofi-black flex items-center justify-center hover:bg-white transition-colors bg-white/50">
+<img alt="Google" class="w-5 h-5 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHGT-CZ7I7ckclkFFaOq3TYViGU0uTvk9uMFM5t8yYl2jrTf_sLEoMKdVgrjLG_g7qT4Exe4y36uWcNi4Ub_y1z38gUQIomqRDxsYDVsYdZ_hOh2WeXXOKOsmVz0yFrP3cNV25DgHW-2scav_V5vQxaXs7xAkpKB_i9ZDCPigRAbnqO3NbKxTpy9D7KLG5Z8uAJOnGuVJV5to1yECrI3-XE9sOa_rN5L6ZM7GBsCQcj4ZAvodlQptrcNxiJzM_l5BN25IpCKfGQ7U"/>
+</button>
+<button class="w-12 h-12 rounded-full border border-lofi-black flex items-center justify-center hover:bg-white transition-colors bg-white/50">
+<img alt="Apple" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZF7vwjR6ASFTz11BU2TH7QrclYzvnziyWGIX_Pcg8mlEbXhg-q-xO5CkW44eBjM9_QPYNIXxtj9L4OXTQU9iU1ZZbj8lbahOxjEfSS-R3acQMoepaVCC_NT_4jmzfI1bplNSjhZAs1-OcumJ-bBve8Smj-exT8V6LDeHpJfpyGwAZE46r0QtfAKB1M8cbK0OA1ClenhMAJvkKQdu6XZFbw4Fm1frcQ2GwtSphsFxgbgLd-7syIOFZPWitj9MsOsn-Xv3onESraNY"/>
+</button>
+<button class="w-12 h-12 rounded-full border border-lofi-black flex items-center justify-center hover:bg-white transition-colors bg-white/50">
+<img alt="Facebook" class="w-5 h-5 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsKwbGmBvwO8b136U8qhrSUgjQsBKGeZ1OCKrzS1rbphEn2uNtZ7I65fGe4sQzL8w6Ps9iqXc-ZRlSImaFhuz-gB2XC0F-HDiZmyuKGNs2RdwBlgKIWtD76gzTrUywhzLEt-eiwo0uE4izUaI9cLvEB5P21DsFdLj35zC6pobsy7xKGFwNOM5wFIYYwvnajeNpTvJ1I-KgLMuuFZ3v_xEBwno6f3tVvXPznoKyZJsMPnuep8eaQte5KHErN7czD8aR9H9A6lIdXbE"/>
+</button>
+</div>
+<p class="text-center mt-8 text-lofi-black text-sm">
+                    New here? <a class="font-bold underline" href="#">Join the community</a>
+</p>
+</div>
+</div>
+<div class="flex justify-center pb-2">
+<div class="w-32 h-1 bg-lofi-black rounded-full opacity-20"></div>
+</div>
+</div>
+<button class="fixed bottom-6 right-6 w-12 h-12 bg-white border-2 border-lofi-black rounded-full shadow-[4px_4px_0_0_#1A1A1A] flex items-center justify-center text-lofi-black hover:translate-y-[-2px] transition-transform" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+
+</body></html>

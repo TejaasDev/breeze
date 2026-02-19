@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Breeze Community - Lo-Fi Style</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --bg-cream: #F9F9F2;
+            --mint-green: #98FFD9;
+            --pastel-pink: #FFD6E8;
+            --pastel-yellow: #FFF4BD;
+            --pastel-blue: #D0EFFF;
+            --border-black: #000000;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-cream);
+            background-image: 
+                linear-gradient(to right, #e5e5dd 1px, transparent 1px),
+                linear-gradient(to bottom, #e5e5dd 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .stamp-effect {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .pill-shadow {
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+        }
+        .nav-pill-shadow {
+            box-shadow: 0px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-36 text-black">
+<div class="h-11 flex justify-between items-end px-8 pb-1">
+<span class="text-xs font-bold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<header class="px-6 py-6 flex justify-between items-center">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight italic">Community</h1>
+<p class="text-black/60 text-xs font-medium uppercase tracking-widest">Growth Companion</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-white border-2 border-black flex items-center justify-center pill-shadow">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<nav class="flex px-6 gap-4 mb-8 overflow-x-auto no-scrollbar">
+<button class="bg-black text-white px-6 py-2 rounded-full text-sm font-bold">Connect</button>
+<button class="bg-white border-2 border-black px-6 py-2 rounded-full text-sm font-bold pill-shadow">Circles</button>
+<button class="bg-white border-2 border-black px-6 py-2 rounded-full text-sm font-bold pill-shadow text-black/40 border-black/20">Events</button>
+</nav>
+<section class="px-6 mb-10">
+<div class="relative bg-[var(--mint-green)] border-2 border-black p-6 rounded-[30px] stamp-effect overflow-hidden">
+<div class="relative z-10 max-w-[65%]">
+<h2 class="text-2xl font-black leading-tight mb-2">Find your partner!</h2>
+<p class="text-black/80 text-xs font-semibold mb-6">Users with partners reach goals 3x faster.</p>
+<button class="bg-black text-white px-6 py-3 rounded-full font-bold text-xs uppercase tracking-widest active:translate-y-0.5 transition-transform">
+                    Make Friends
+                </button>
+</div>
+<div class="absolute -right-2 -bottom-2 w-36 h-36 bg-white border-2 border-black rotate-3 p-2 shadow-lg">
+<img alt="Mascot Character" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLKOe3cWWXRXw8jVUh7B8bGTyuHHudX5OYR8aNBiaUPBHRUDU-Y2fabFKdQfkkMYmYMKXQJMubRX2xSrt2p6catIpQrlcGsDKPOCIVBVesjoJMUpIRBFTGpxN9E_t8dAPTBkquot0gfPchQAcRGdzEkIXG1OxuIGJqqElL_oqkQRVJDD6oG3-YaoyQUMpJ2poBvVg8lcRuO0XF33n384FOI6FzozeiusyLd1VK71_3zLY0FKVE8of5LxmCJzh9ejyK4DGazdMDLLk"/>
+</div>
+</div>
+</section>
+<section class="px-6 mb-10">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-black italic">People to Meet</h3>
+<button class="text-xs font-bold uppercase underline tracking-tighter">See all</button>
+</div>
+<div class="space-y-4">
+<div class="bg-white rounded-full border border-black p-2 flex items-center gap-4 pill-shadow">
+<div class="w-14 h-14 rounded-full border-2 border-black overflow-hidden flex-shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwPrgiIiEU5RPmkeo5Y029W2QYDQ0jIHlQr42LYLgqUxD2a0PaqnSiYJI1NrIWeoHYWMjVCuQ4hI9WEjO96Pglj-V79ABPA50bZpYQYTG_C6w30gOoCGkv67XtEQZ318KWwm1nXqz7odXdvgPMAqJ5aWVTpkONlaFmCA2EzRdswy2BJIitc7dHlT3It-_H-cAIoJeAs5iJHkYhe36ei_Hf73AkmAnpg4N9aPhdSNUpXsHSlcfch8bmKVQkmAWHYAhCQ15g8vG1Ro8"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm truncate">Alex Rivera</h4>
+<p class="text-[10px] text-black/60 font-semibold uppercase tracking-tight truncate">Mindful Productivity</p>
+</div>
+<button class="mr-2 w-10 h-10 bg-[var(--pastel-blue)] rounded-full border border-black flex items-center justify-center">
+<span class="material-symbols-outlined text-black">person_add</span>
+</button>
+</div>
+<div class="bg-white rounded-full border border-black p-2 flex items-center gap-4 pill-shadow">
+<div class="w-14 h-14 rounded-full border-2 border-black overflow-hidden flex-shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2c2IcSgxCHZrXpManj7ozXfDuHNXhAdBuCKGDfLToob6V9VdHlGJHmgpVAPCw6_O80q8fQrjTDZXEQFYh7utW31jt7Tcv_dn1dh-vtQnEAS9yo3GzE8lLvRCWSnz4h6xBFyZa4DJWKf0_Qmi2119aFGfDzlSn9_ovy6xQxemGqlgVobwokVUmgf63GNAN185D0dlOhW3zvMwe1Oydhn5BefnefjpFImfwjbvlWqT5q9scwtdL8E-q9qIrXGe15R0yRhMEqD-mvk"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm truncate">Sarah Chen</h4>
+<p class="text-[10px] text-black/60 font-semibold uppercase tracking-tight truncate">Social Confidence</p>
+</div>
+<button class="mr-2 w-10 h-10 bg-[var(--pastel-pink)] rounded-full border border-black flex items-center justify-center">
+<span class="material-symbols-outlined text-black">person_add</span>
+</button>
+</div>
+</div>
+</section>
+<section class="px-6 mb-12">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-black italic">Popular Circles</h3>
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-[var(--pastel-blue)] p-5 rounded-[30px] border-2 border-black flex flex-col items-center text-center stamp-effect">
+<div class="w-12 h-12 bg-white rounded-full border-2 border-black flex items-center justify-center mb-3">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h5 class="font-bold text-sm mb-1 leading-tight">Growth Mindset</h5>
+<p class="text-[9px] font-black uppercase bg-black text-white px-2 py-0.5 rounded-full">12.4k</p>
+</div>
+<div class="bg-[var(--pastel-yellow)] p-5 rounded-[30px] border-2 border-black flex flex-col items-center text-center stamp-effect">
+<div class="w-12 h-12 bg-white rounded-full border-2 border-black flex items-center justify-center mb-3">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<h5 class="font-bold text-sm mb-1 leading-tight">Early Birds</h5>
+<p class="text-[9px] font-black uppercase bg-black text-white px-2 py-0.5 rounded-full">8.2k</p>
+</div>
+<div class="bg-[var(--pastel-pink)] p-5 rounded-[30px] border-2 border-black flex flex-col items-center text-center stamp-effect">
+<div class="w-12 h-12 bg-white rounded-full border-2 border-black flex items-center justify-center mb-3">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<h5 class="font-bold text-sm mb-1 leading-tight">Book Worms</h5>
+<p class="text-[9px] font-black uppercase bg-black text-white px-2 py-0.5 rounded-full">5.1k</p>
+</div>
+<div class="bg-[var(--mint-green)] p-5 rounded-[30px] border-2 border-black flex flex-col items-center text-center stamp-effect">
+<div class="w-12 h-12 bg-white rounded-full border-2 border-black flex items-center justify-center mb-3">
+<span class="material-symbols-outlined">palette</span>
+</div>
+<h5 class="font-bold text-sm mb-1 leading-tight">Creative Souls</h5>
+<p class="text-[9px] font-black uppercase bg-black text-white px-2 py-0.5 rounded-full">3.9k</p>
+</div>
+</div>
+</section>
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-sm z-50">
+<div class="bg-white border-2 border-black rounded-full h-[52px] flex items-center justify-between px-2 nav-pill-shadow relative">
+<div class="flex-1 flex items-center justify-around pr-8">
+<button class="material-symbols-outlined text-black text-2xl">grid_view</button>
+<button class="material-symbols-outlined text-black/30 text-2xl">bar_chart_4_bars</button>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+<button class="w-[68px] h-[68px] bg-black rounded-full border-[3px] border-white flex items-center justify-center shadow-xl active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-white text-3xl font-bold">add</span>
+</button>
+</div>
+<div class="flex-1 flex items-center justify-around pl-8">
+<button class="material-symbols-outlined text-black text-2xl">groups</button>
+<button class="material-symbols-outlined text-black/30 text-2xl">person</button>
+</div>
+</div>
+</div>
+
+</body></html>
