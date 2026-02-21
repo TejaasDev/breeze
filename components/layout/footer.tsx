@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Wind } from "lucide-react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 
 export function Footer() {
@@ -13,11 +13,17 @@ export function Footer() {
                         <div className="flex items-center gap-3">
                             <motion.div
                                 whileHover={{ rotate: 10 }}
-                                className="rounded-full bg-lofi-yellow lofi-border p-2 text-black"
+                                className="rounded-xl bg-lofi-card lofi-border p-1 text-black w-10 h-10 flex items-center justify-center relative overflow-hidden"
                             >
-                                <Wind className="h-5 w-5" />
+                                <Image
+                                    src="/logo.png"
+                                    alt="Breeze Logo"
+                                    width={32}
+                                    height={32}
+                                    className="object-contain"
+                                />
                             </motion.div>
-                            <span className="text-2xl font-black uppercase italic tracking-tighter">
+                            <span className="text-2xl font-black uppercase tracking-tighter">
                                 Breeze
                             </span>
                         </div>

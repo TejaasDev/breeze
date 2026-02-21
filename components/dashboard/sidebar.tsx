@@ -12,6 +12,7 @@ import {
     Wind,
     Leaf
 } from "lucide-react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 
 const navItems = [
@@ -31,11 +32,17 @@ export function Sidebar() {
                 <div className="flex items-center gap-3 mb-10 text-lofi-text">
                     <motion.div
                         whileHover={{ rotate: -10 }}
-                        className="rounded-full bg-lofi-yellow lofi-border p-2 text-lofi-black lofi-shadow"
+                        className="rounded-2xl bg-lofi-card lofi-border p-1 text-lofi-black lofi-shadow w-12 h-12 flex items-center justify-center relative overflow-hidden"
                     >
-                        <Wind className="h-6 w-6" />
+                        <Image
+                            src="/logo.png"
+                            alt="Breeze Logo"
+                            width={40}
+                            height={40}
+                            className="object-contain"
+                        />
                     </motion.div>
-                    <span className="text-2xl font-black tracking-tight uppercase italic">Breeze</span>
+                    <span className="text-2xl font-black tracking-tight uppercase">Breeze</span>
                 </div>
 
                 <nav className="space-y-4">

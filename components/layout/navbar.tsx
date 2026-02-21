@@ -11,6 +11,8 @@ import { ThemeToggle } from "./theme-toggle"
 import { createClient } from "@/lib/supabase-browser"
 import { useRouter } from "next/navigation"
 
+import Image from "next/image"
+
 export function Navbar() {
     const [scrolled, setScrolled] = React.useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
@@ -61,11 +63,17 @@ export function Navbar() {
                     <Link href="/" className="flex items-center gap-2">
                         <motion.div
                             whileHover={{ rotate: 10 }}
-                            className="rounded-full bg-lofi-yellow lofi-border p-1 text-lofi-black"
+                            className="rounded-xl bg-lofi-card lofi-border p-1 text-lofi-black w-10 h-10 flex items-center justify-center relative overflow-hidden"
                         >
-                            <Wind className="h-4 w-4 md:h-5 md:w-5" />
+                            <Image
+                                src="/logo.png"
+                                alt="Breeze Logo"
+                                width={32}
+                                height={32}
+                                className="object-contain"
+                            />
                         </motion.div>
-                        <span className="text-lg md:text-xl font-black uppercase italic tracking-tight text-lofi-text">
+                        <span className="text-lg md:text-xl font-black uppercase tracking-tight text-lofi-text">
                             Breeze
                         </span>
                     </Link>

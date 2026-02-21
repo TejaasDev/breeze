@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight, Sparkles, Wind, Leaf, Sun } from "lucide-react"
+import Image from "next/image"
 
 export function Hero() {
     return (
@@ -60,8 +61,14 @@ export function Hero() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-1/4 left-10 opacity-30 pointer-events-none hidden lg:block"
             >
-                <div className="lofi-border p-4 rounded-3xl bg-pastel-pink lofi-shadow">
-                    <Leaf className="w-12 h-12 text-black" />
+                <div className="lofi-border p-2 rounded-3xl bg-pastel-pink lofi-shadow w-20 h-20 flex items-center justify-center relative overflow-hidden">
+                    <Image
+                        src="/logo.png"
+                        alt="Breeze Logo"
+                        width={64}
+                        height={64}
+                        className="object-contain grayscale contrast-125 opacity-80"
+                    />
                 </div>
             </motion.div>
 

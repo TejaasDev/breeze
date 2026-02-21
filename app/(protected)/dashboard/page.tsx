@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase-browser"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import {
     Trophy,
     Bell,
@@ -42,11 +43,22 @@ export default function DashboardPage() {
         <div className="space-y-8 font-space-grotesk">
             {/* Header Section */}
             <header className="flex justify-between items-center">
-                <div className="text-lofi-text">
-                    <h1 className="text-3xl font-bold tracking-tight uppercase italic">Breeze</h1>
-                    <p className="text-sm font-medium opacity-70">
-                        Good morning, {user?.email?.split('@')[0] || 'Voyager'}
-                    </p>
+                <div className="text-lofi-text flex items-center gap-3">
+                    <div className="w-10 h-10 bg-lofi-card lofi-border rounded-xl flex items-center justify-center p-1 relative overflow-hidden lofi-shadow md:hidden">
+                        <Image
+                            src="/logo.png"
+                            alt="Breeze Logo"
+                            width={32}
+                            height={32}
+                            className="object-contain"
+                        />
+                    </div>
+                    <div>
+                        <h1 className="text-3xl font-bold tracking-tight uppercase">Breeze</h1>
+                        <p className="text-sm font-medium opacity-70">
+                            Good morning, {user?.email?.split('@')[0] || 'Voyager'}
+                        </p>
+                    </div>
                 </div>
                 <motion.button
                     whileHover={{ scale: 1.05 }}
