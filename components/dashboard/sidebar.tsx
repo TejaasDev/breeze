@@ -83,24 +83,24 @@ export function Sidebar() {
                                 key={item.href}
                                 href={item.locked ? "#" : item.href}
                                 className={cn(
-                                    "flex items-center gap-4 px-5 py-4 rounded-2xl text-sm font-bold uppercase transition-all lofi-border",
+                                    "flex items-center gap-4 px-5 py-4 rounded-2xl text-sm font-bold uppercase transition-all lofi-border group",
                                     isActive
-                                        ? "bg-lofi-text text-lofi-bg lofi-shadow translate-y-[-2px]"
-                                        : "bg-lofi-card text-lofi-text hover:bg-lofi-grey",
-                                    item.locked && "opacity-40 cursor-not-allowed grayscale"
+                                        ? "bg-lofi-text/10 text-lofi-text lofi-shadow border-lofi-text shadow-[0_0_20px_rgba(74,222,128,0.2)] dark:shadow-[0_0_25px_rgba(74,222,128,0.15)]"
+                                        : "bg-lofi-card/30 text-lofi-text/60 hover:text-lofi-text hover:bg-lofi-card/50",
+                                    item.locked && "opacity-30 cursor-not-allowed grayscale"
                                 )}
                             >
                                 <div className={cn(
-                                    "stamp-icon",
-                                    isActive ? "border-current" : "border-lofi-border text-lofi-text"
+                                    "stamp-icon transition-colors",
+                                    isActive ? "border-lofi-text text-lofi-text" : "border-lofi-text/20 text-lofi-text/40 group-hover:text-lofi-text group-hover:border-lofi-text/60"
                                 )}>
                                     <item.icon className="h-5 w-5" />
                                 </div>
-                                <span className={cn(isActive ? "text-lofi-bg" : "text-lofi-text")}>
+                                <span className="tracking-widest">
                                     {item.label}
                                 </span>
                                 {item.locked && (
-                                    <span className="ml-auto text-[8px] font-black tracking-[0.2em] opacity-60">
+                                    <span className="ml-auto text-[8px] font-black tracking-[0.2em] opacity-40">
                                         LOCKED
                                     </span>
                                 )}

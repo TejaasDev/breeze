@@ -154,29 +154,32 @@
   --ring: #475569;
   /* slate-600 */
 
-  /* Lo-Fi Dark Variables */
-  --lofi-cream: #0A0A0A;
+  /* Lo-Fi Dark Variables - Refined for Premium Depth */
+  --lofi-cream: #0B0E11;
+  /* Deep Navy Charcoal */
   --lofi-yellow: #FFD700;
   --lofi-black: #F8FAFC;
-  --lofi-grey: #404040;
-  --grid-color: #1A1A1A;
+  --lofi-grey: #64748B;
+  /* Higher visibility slate-500 */
+  --grid-color: rgba(248, 250, 252, 0.05);
+  /* Very subtle grid */
 
-  --lofi-border: #F8FAFC;
-  --lofi-bg: #0A0A0A;
+  --lofi-border: rgba(248, 250, 252, 0.2);
+  /* Softened transparent border */
+  --lofi-bg: #0B0E11;
   --lofi-text: #F8FAFC;
-  --lofi-card-bg: #141414;
+  --lofi-card-bg: rgba(20, 20, 25, 0.7);
+  /* Frosted glass base */
 
-  /* Dark Theme Palette Optimization */
-  --color-mint-green: #2D4A43;
-  /* Deeper Mint */
-  --color-pastel-pink: #4A2D35;
-  /* Deeper Pink */
-  --color-pastel-yellow: #4A422D;
-  /* Deeper Yellow */
+  /* Jewel-Toned Premium Palette (Dark Mode) */
+  --color-mint-green: #1a2e2a;
+  --color-pastel-pink: #2e1a20;
+  --color-pastel-yellow: #2e2a1a;
 
-  --color-deep-mint: #B2D8D0;
-  --color-deep-pink: #FFC0CB;
-  --color-deep-yellow: #FEF08A;
+  --color-deep-mint: #4ADE80;
+  /* Brighter neon for accents */
+  --color-deep-pink: #F472B6;
+  --color-deep-yellow: #FBBF24;
   --color-charcoal: #F8FAFC;
 }
 
@@ -236,4 +239,20 @@ h6 {
   background-image:
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+}
+
+.lofi-glass {
+  background: rgba(20, 20, 25, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.dark .lofi-shadow {
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.lofi-border {
+  border: 1.5px solid var(--lofi-border);
 }

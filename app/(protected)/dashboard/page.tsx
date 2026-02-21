@@ -14,8 +14,10 @@ import {
     Sun,
     Leaf,
     Wind,
-    ArrowUpRight
+    ArrowUpRight,
+    TrendingUp
 } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export default function DashboardPage() {
     const [user, setUser] = useState<any>(null)
@@ -74,31 +76,31 @@ export default function DashboardPage() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-mint-green lofi-border rounded-[30px] p-8 lofi-shadow relative overflow-hidden border-4 border-deep-mint"
+                    className="bg-mint-green lofi-border rounded-[30px] p-8 lofi-shadow relative overflow-hidden border-4 border-deep-mint shadow-[inset_0_0_40px_rgba(74,222,128,0.1)]"
                 >
                     <div className="flex flex-col items-center text-center relative z-10 text-deep-mint">
                         <div className="relative mb-6">
-                            <div className="w-40 h-40 bg-lofi-card border-4 border-deep-mint rounded-full p-1 overflow-hidden lofi-shadow">
+                            <div className="w-40 h-40 bg-lofi-card/40 border-4 border-deep-mint rounded-full p-1 overflow-hidden lofi-shadow">
                                 <img
                                     alt="Avatar"
                                     className="w-full h-full rounded-full object-cover"
-                                    src={profile?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.id || 'default'}`}
+                                    src={profile?.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"}
                                 />
                             </div>
-                            <div className="absolute -bottom-2 -left-2 bg-lofi-card border-3 border-deep-mint px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest lofi-shadow text-deep-mint">
+                            <div className="absolute -bottom-2 -left-2 bg-lofi-card/60 backdrop-blur-md border-3 border-deep-mint px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest lofi-shadow text-deep-mint">
                                 LVL {Math.floor((profile?.xp || 0) / 100) + 1}
                             </div>
                         </div>
                         <h2 className="text-4xl font-black uppercase mb-1 tracking-tight">BLOOM STATUS</h2>
-                        <p className="text-base font-black mb-8 italic">
+                        <p className="text-sm font-black opacity-80 uppercase tracking-widest mb-6">
                             {profile?.streak > 0 ? `Growing ${profile.streak * 5}% faster this week!` : "Ready to start growing?"}
                         </p>
 
-                        <div className="w-full bg-lofi-bg border-3 border-deep-mint h-8 rounded-full overflow-hidden mb-3 lofi-shadow shadow-inner">
+                        <div className="w-full bg-lofi-text/10 border-3 border-deep-mint h-8 rounded-full overflow-hidden mb-3 lofi-shadow shadow-inner">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${(profile?.xp % 100) || 30}%` }}
-                                className="bg-deep-mint h-full"
+                                className="bg-deep-mint h-full shadow-[0_0_20px_rgba(74,222,128,0.4)]"
                             />
                         </div>
                         <div className="flex justify-between w-full text-xs font-black uppercase tracking-widest">
@@ -116,48 +118,42 @@ export default function DashboardPage() {
             <section className="grid grid-cols-2 gap-6">
                 <motion.div
                     whileHover={{ y: -4 }}
-                    className="bg-pastel-pink lofi-border p-6 rounded-[28px] lofi-shadow flex flex-col items-start gap-4 border-4 border-deep-pink"
+                    className="bg-pastel-pink/20 lofi-border lofi-glass p-6 rounded-[28px] lofi-shadow flex flex-col items-start gap-4 border-2 border-deep-pink/30 hover:bg-pastel-pink/30 transition-all"
                 >
-                    <div className="bg-lofi-card border-2 border-deep-pink p-2 rounded-xl text-deep-pink lofi-shadow">
+                    <div className="bg-lofi-card/50 border-2 border-deep-pink p-2 rounded-xl text-deep-pink lofi-shadow">
                         <Heart className="w-7 h-7" />
                     </div>
                     <div>
-                        <p className="text-sm font-black uppercase tracking-widest mb-1 text-deep-pink">Confidence</p>
-                        <div className="flex items-baseline gap-2">
-                            <span className="text-5xl font-black text-deep-pink">{profile?.confidence_score || 0}</span>
-                            <span className="text-sm font-black hand-drawn text-rose-800">+4%</span>
-                        </div>
+                        <h3 className="text-xs font-black uppercase tracking-widest text-lofi-text/60 mb-1">Vitality</h3>
+                        <p className="text-4xl font-black text-lofi-text">84%</p>
                     </div>
                 </motion.div>
 
                 <motion.div
                     whileHover={{ y: -4 }}
-                    className="bg-pastel-yellow lofi-border p-6 rounded-[28px] lofi-shadow flex flex-col items-start gap-4 border-4 border-deep-yellow"
+                    className="bg-pastel-yellow/20 lofi-border lofi-glass p-6 rounded-[28px] lofi-shadow flex flex-col items-start gap-4 border-2 border-deep-yellow/30 hover:bg-pastel-yellow/30 transition-all"
                 >
-                    <div className="bg-lofi-card border-2 border-deep-yellow p-2 rounded-xl text-deep-yellow lofi-shadow">
+                    <div className="bg-lofi-card/50 border-2 border-deep-yellow p-2 rounded-xl text-deep-yellow lofi-shadow">
                         <Flame className="w-7 h-7" />
                     </div>
                     <div>
-                        <p className="text-sm font-black uppercase tracking-widest mb-1 text-deep-yellow">Streak</p>
-                        <div className="flex items-baseline gap-2">
-                            <span className="text-5xl font-black text-deep-yellow">{profile?.streak || 0}</span>
-                            <span className="text-sm font-black hand-drawn text-deep-yellow">days</span>
-                        </div>
+                        <h3 className="text-xs font-black uppercase tracking-widest text-lofi-text/60 mb-1">Streak</h3>
+                        <p className="text-4xl font-black text-lofi-text">{profile?.streak || 12}</p>
                     </div>
                 </motion.div>
             </section>
 
             {/* Mood Cycle Chart */}
             <section>
-                <div className="flex justify-between items-end mb-4">
-                    <h3 className="text-2xl font-black uppercase text-charcoal">Mood Cycle</h3>
-                    <div className="flex bg-lofi-card lofi-border p-1 rounded-xl text-xs font-black uppercase text-charcoal border-3 border-charcoal lofi-shadow">
-                        <button className="px-4 py-1.5 bg-lofi-text text-lofi-bg rounded-lg">Wk</button>
-                        <button className="px-4 py-1.5">Mo</button>
-                        <button className="px-4 py-1.5">Yr</button>
+                <div className="flex justify-between items-end mb-4 px-2">
+                    <h3 className="text-2xl font-black uppercase text-lofi-text tracking-tight">Mood Cycle</h3>
+                    <div className="flex bg-lofi-card/40 backdrop-blur-md lofi-border p-1 rounded-xl text-[10px] font-black uppercase text-lofi-text border-2 border-lofi-border/50 lofi-shadow">
+                        <button className="px-5 py-2 bg-lofi-text text-lofi-bg rounded-lg shadow-lg">Wk</button>
+                        <button className="px-5 py-2 opacity-50 hover:opacity-100 transition-opacity">Mo</button>
+                        <button className="px-5 py-2 opacity-50 hover:opacity-100 transition-opacity">Yr</button>
                     </div>
                 </div>
-                <div className="bg-lofi-card lofi-border p-8 rounded-[35px] lofi-shadow border-4 border-charcoal relative h-56 flex items-center justify-center overflow-hidden">
+                <div className="bg-lofi-card/50 lofi-border lofi-glass p-10 rounded-[40px] border-2 border-lofi-border/30 relative h-64 flex items-center justify-center overflow-hidden">
                     <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 400 150">
                         <motion.path
                             initial={{ pathLength: 0 }}
@@ -168,20 +164,23 @@ export default function DashboardPage() {
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeWidth="5"
-                            className="text-charcoal"
+                            className="text-deep-mint opacity-80"
                         />
                         <motion.circle
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 1 }}
                             cx="150" cy="70" fill="currentColor" r="8"
-                            className="text-charcoal"
+                            className="text-deep-mint shadow-[0_0_15px_rgba(74,222,128,0.5)]"
                         />
                     </svg>
-                    <div className="absolute bottom-6 left-10 right-10 flex justify-between text-xs font-black text-charcoal uppercase tracking-widest">
+                    <div className="absolute bottom-6 left-12 right-12 flex justify-between text-xs font-black text-lofi-text opacity-40 uppercase tracking-widest">
                         <span>Mon</span>
+                        <span>Tue</span>
                         <span>Wed</span>
+                        <span>Thu</span>
                         <span>Fri</span>
+                        <span>Sat</span>
                         <span>Sun</span>
                     </div>
                 </div>
@@ -213,24 +212,25 @@ export default function DashboardPage() {
             {/* Vibe Gallery */}
             <section>
                 <h3 className="text-2xl font-black uppercase text-charcoal mb-6">Vibe Gallery</h3>
-                <div className="flex gap-6 overflow-x-auto no-scrollbar pb-6 -mx-6 px-6">
+                <section className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     {[
-                        { icon: Sun, label: "Radiant", color: "bg-pastel-yellow", border: "border-deep-yellow", rotate: "-rotate-2" },
-                        { icon: Leaf, label: "Peaceful", color: "bg-mint-green", border: "border-deep-mint", rotate: "rotate-1" },
-                        { icon: Wind, label: "Dynamic", color: "bg-pastel-pink", border: "border-deep-pink", rotate: "-rotate-1" }
+                        { label: "Reflect", icon: Wind, color: "bg-deep-mint/10", border: "border-deep-mint/30", rotate: "-rotate-2", text: "text-deep-mint" },
+                        { label: "Meditate", icon: Leaf, color: "bg-deep-pink/10", border: "border-deep-pink/30", rotate: "rotate-3", text: "text-deep-pink" },
+                        { label: "Focus", icon: TrendingUp, color: "bg-deep-yellow/10", border: "border-deep-yellow/30", rotate: "-rotate-1", text: "text-deep-yellow" },
+                        { label: "Breathe", icon: Wind, color: "bg-lofi-card/20", border: "border-lofi-border/30", rotate: "rotate-2", text: "text-lofi-text" },
                     ].map((vibe, idx) => (
                         <motion.div
                             key={idx}
-                            whileHover={{ rotate: 0, scale: 1.05 }}
-                            className={`${vibe.color} ${vibe.border} border-4 min-w-[140px] aspect-square lofi-border rounded-3xl p-5 flex flex-col justify-between lofi-shadow ${vibe.rotate} transition-all`}
+                            whileHover={{ rotate: 0, scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
+                            className={`${vibe.color} ${vibe.border} border-2 min-w-[140px] aspect-square lofi-glass rounded-3xl p-6 flex flex-col justify-between lofi-shadow transition-all`}
                         >
-                            <div className="bg-lofi-card border-2 border-current p-1.5 rounded-xl self-start lofi-shadow">
+                            <div className={cn("bg-lofi-card/50 border-2 border-current p-2 rounded-xl self-start lofi-shadow", vibe.text)}>
                                 <vibe.icon className="w-6 h-6" />
                             </div>
-                            <span className="text-sm font-black uppercase tracking-widest text-charcoal">{vibe.label}</span>
+                            <span className={cn("text-xs font-black uppercase tracking-widest", vibe.text)}>{vibe.label}</span>
                         </motion.div>
                     ))}
-                </div>
+                </section>
             </section>
         </div>
     )
