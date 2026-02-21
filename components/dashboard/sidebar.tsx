@@ -10,10 +10,16 @@ import {
     Users,
     Settings,
     Wind,
-    Leaf
+    Leaf,
+    LogOut,
+    User
 } from "lucide-react"
 import Image from "next/image"
 import { motion } from "framer-motion"
+
+import { useState, useEffect } from "react"
+import { createClient } from "@/lib/supabase-browser"
+import { useRouter } from "next/navigation"
 
 const navItems = [
     { href: "/dashboard", label: "Today", icon: LayoutDashboard },
@@ -25,6 +31,30 @@ const navItems = [
 
 export function Sidebar() {
     const pathname = usePathname()
+    const supabase = createClient()
+    const router = useRouter()
+    const [profile, setProfile] = useState<any>(null)
+
+    useEffect(() => {
+        async function loadProfile() {
+            const { data: { user } } = await supabase.auth.getUser()
+            if (user) {
+                const { data } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', user.id)
+                    .single()
+                setProfile(data)
+            }
+        }
+        loadProfile()
+    }, [])
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut()
+        router.push("/")
+        router.refresh()
+    }
 
     return (
         <aside className="hidden md:flex flex-col w-72 bg-lofi-bg border-r-4 border-lofi-border h-screen sticky top-0 font-space-grotesk grid-background">
@@ -80,16 +110,27 @@ export function Sidebar() {
                 </nav>
             </div>
 
-            <div className="p-8 border-t-4 border-lofi-border bg-lofi-card/50 backdrop-blur-sm text-lofi-text">
-                <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full lofi-border bg-pastel-pink lofi-shadow flex items-center justify-center text-sm font-black text-black">
-                        P
+            <div className="p-6 border-t-4 border-lofi-border bg-lofi-card/50 backdrop-blur-sm text-lofi-text">
+                <Link href="/settings" className="flex items-center gap-3 mb-4 group cursor-pointer">
+                    <div className="h-10 w-10 shrink-0 rounded-full lofi-border bg-pastel-pink lofi-shadow overflow-hidden flex items-center justify-center group-hover:translate-y-[-2px] transition-transform">
+                        {profile?.avatar_url ? (
+                            <img src={profile.avatar_url} alt="Profile" className="h-full w-full object-cover" />
+                        ) : (
+                            <User className="h-5 w-5 text-black" />
+                        )}
                     </div>
                     <div className="flex-1 overflow-hidden">
-                        <p className="text-sm font-black uppercase truncate">Professor</p>
-                        <p className="text-[10px] font-black opacity-80 uppercase tracking-widest truncate">Level 14 • Bloom Status</p>
+                        <p className="text-xs font-black uppercase truncate group-hover:text-lofi-yellow transition-colors">{profile?.full_name || "Voyager"}</p>
+                        <p className="text-[10px] font-black opacity-80 uppercase tracking-widest truncate">Level {Math.floor((profile?.xp || 0) / 100) + 1}</p>
                     </div>
-                </div>
+                </Link>
+                <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-2 px-4 py-2 bg-lofi-card lofi-border rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-rose-500 hover:text-white transition-all lofi-shadow"
+                >
+                    <LogOut className="h-3 w-3" />
+                    Secure Logout
+                </button>
             </div>
         </aside>
     )

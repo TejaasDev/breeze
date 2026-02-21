@@ -1,87 +1,251 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Moon, Sun, Monitor, LogOut } from "lucide-react"
+import { Moon, Sun, Monitor, LogOut, User, Camera, Save, X, Loader2 } from "lucide-react"
+import { createClient } from "@/lib/supabase-browser"
+import { useRouter } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function SettingsPage() {
     const { setTheme, theme } = useTheme()
+    const supabase = createClient()
+    const router = useRouter()
+    const [user, setUser] = useState<any>(null)
+    const [profile, setProfile] = useState<any>(null)
+    const [loading, setLoading] = useState(true)
+    const [saving, setSaving] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const [editForm, setEditForm] = useState({
+        full_name: "",
+        avatar_url: ""
+    })
+
+    useEffect(() => {
+        async function loadSettings() {
+            setLoading(true)
+            const { data: { user } } = await supabase.auth.getUser()
+            setUser(user)
+
+            if (user) {
+                const { data: profileData } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', user.id)
+                    .single()
+
+                setProfile(profileData)
+                if (profileData) {
+                    setEditForm({
+                        full_name: profileData.full_name || "",
+                        avatar_url: profileData.avatar_url || ""
+                    })
+                }
+            }
+            setLoading(false)
+        }
+        loadSettings()
+    }, [])
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut()
+        router.push("/")
+        router.refresh()
+    }
+
+    const handleSaveProfile = async () => {
+        setSaving(true)
+        const { error } = await supabase
+            .from('profiles')
+            .update({
+                full_name: editForm.full_name,
+                avatar_url: editForm.avatar_url,
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', user.id)
+
+        if (!error) {
+            setProfile({ ...profile, ...editForm })
+            setIsEditing(false)
+            router.refresh()
+        }
+        setSaving(false)
+    }
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-[60vh]">
+                <Loader2 className="h-8 w-8 animate-spin text-lofi-text" />
+            </div>
+        )
+    }
 
     return (
-        <div className="space-y-8 max-w-2xl mx-auto">
-            <h1 className="font-heading text-3xl font-bold">Settings</h1>
+        <div className="space-y-8 max-w-2xl mx-auto pb-20 font-space-grotesk">
+            <h1 className="text-4xl font-black uppercase tracking-tight text-lofi-text">Settings</h1>
 
             {/* Profile Section */}
-            <Card>
-                <CardHeader>
-                    <CardTitle>Profile</CardTitle>
+            <Card className="lofi-border lofi-shadow border-4 overflow-hidden">
+                <CardHeader className="bg-lofi-card border-b-4 border-lofi-border">
+                    <CardTitle className="text-xl font-black uppercase flex justify-between items-center text-lofi-text">
+                        Profile
+                        {!isEditing && (
+                            <Button
+                                onClick={() => setIsEditing(true)}
+                                variant="outline"
+                                size="sm"
+                                className="lofi-border font-black uppercase text-xs"
+                            >
+                                Edit Profile
+                            </Button>
+                        )}
+                    </CardTitle>
                 </CardHeader>
-                <CardContent className="flex items-center gap-4">
-                    <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center text-xl font-bold text-muted-foreground">
-                        ME
-                    </div>
-                    <div className="flex-1">
-                        <h3 className="font-semibold text-lg">Tejaas</h3>
-                        <p className="text-sm text-muted-foreground">tejaas@example.com</p>
-                    </div>
-                    <Button variant="outline" size="sm">Edit</Button>
+                <CardContent className="pt-6 bg-white dark:bg-lofi-card-bg">
+                    <AnimatePresence mode="wait">
+                        {isEditing ? (
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="space-y-6"
+                            >
+                                <div className="space-y-4">
+                                    <div className="flex flex-col gap-2">
+                                        <label className="text-xs font-black uppercase tracking-widest text-lofi-text/60">Display Name</label>
+                                        <input
+                                            value={editForm.full_name}
+                                            onChange={(e) => setEditForm({ ...editForm, full_name: e.target.value })}
+                                            className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
+                                            placeholder="Enter your name"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <label className="text-xs font-black uppercase tracking-widest text-lofi-text/60">Avatar URL</label>
+                                        <input
+                                            value={editForm.avatar_url}
+                                            onChange={(e) => setEditForm({ ...editForm, avatar_url: e.target.value })}
+                                            className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
+                                            placeholder="https://example.com/avatar.jpg"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4 pt-4">
+                                    <Button
+                                        onClick={handleSaveProfile}
+                                        disabled={saving}
+                                        className="flex-1 bg-lofi-yellow text-lofi-black lofi-border font-black uppercase lofi-shadow hover:translate-y-[-2px]"
+                                    >
+                                        {saving ? <Loader2 className="animate-spin h-5 w-5" /> : <> <Save className="mr-2 h-5 w-5" /> Save Changes</>}
+                                    </Button>
+                                    <Button
+                                        onClick={() => setIsEditing(false)}
+                                        variant="outline"
+                                        className="lofi-border font-black uppercase"
+                                    >
+                                        <X className="mr-2 h-5 w-5" /> Cancel
+                                    </Button>
+                                </div>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="flex flex-col sm:flex-row items-center gap-6"
+                            >
+                                <div className="relative">
+                                    <div className="h-24 w-24 rounded-full lofi-border border-4 bg-pastel-pink lofi-shadow overflow-hidden flex items-center justify-center">
+                                        {profile?.avatar_url ? (
+                                            <img src={profile.avatar_url} alt="Profile" className="h-full w-full object-cover" />
+                                        ) : (
+                                            <User className="h-12 w-12 text-black" />
+                                        )}
+                                    </div>
+                                    <div className="absolute -bottom-1 -right-1 bg-lofi-yellow lofi-border p-1.5 rounded-full lofi-shadow">
+                                        <Camera className="h-4 w-4 text-black" />
+                                    </div>
+                                </div>
+                                <div className="flex-1 text-center sm:text-left">
+                                    <h3 className="text-2xl font-black uppercase text-lofi-text tracking-tight">
+                                        {profile?.full_name || "New Voyager"}
+                                    </h3>
+                                    <p className="text-sm font-bold text-lofi-text opacity-70 italic">
+                                        {user?.email}
+                                    </p>
+                                    <div className="mt-3 flex gap-2 justify-center sm:justify-start">
+                                        <Badge className="bg-mint-green text-black lofi-border uppercase text-[10px] font-black tracking-widest px-3 py-1">
+                                            LVL {Math.floor((profile?.xp || 0) / 100) + 1}
+                                        </Badge>
+                                        <Badge className="bg-pastel-yellow text-black lofi-border uppercase text-[10px] font-black tracking-widest px-3 py-1">
+                                            {profile?.streak || 0}-DAY STREAK
+                                        </Badge>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </CardContent>
             </Card>
 
-            {/* Theme Selection */}
-            <Card>
-                <CardHeader>
-                    <CardTitle>Appearance</CardTitle>
+            {/* Appearance Section */}
+            <Card className="lofi-border lofi-shadow border-4 overflow-hidden">
+                <CardHeader className="bg-lofi-card border-b-4 border-lofi-border">
+                    <CardTitle className="text-xl font-black uppercase text-lofi-text">Appearance</CardTitle>
                 </CardHeader>
-                <CardContent>
-                    <div className="grid grid-cols-3 gap-4">
-                        <button
-                            onClick={() => setTheme("light")}
-                            className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${theme === 'light' ? 'border-primary bg-primary/5' : 'hover:bg-muted'}`}
-                        >
-                            <Sun className="h-6 w-6" />
-                            <span className="text-sm font-medium">Light</span>
-                        </button>
-                        <button
-                            onClick={() => setTheme("dark")}
-                            className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${theme === 'dark' ? 'border-primary bg-primary/5' : 'hover:bg-muted'}`}
-                        >
-                            <Moon className="h-6 w-6" />
-                            <span className="text-sm font-medium">Dark</span>
-                        </button>
-                        <button
-                            onClick={() => setTheme("system")}
-                            className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${theme === 'system' ? 'border-primary bg-primary/5' : 'hover:bg-muted'}`}
-                        >
-                            <Monitor className="h-6 w-6" />
-                            <span className="text-sm font-medium">System</span>
-                        </button>
+                <CardContent className="pt-6 bg-white dark:bg-lofi-card-bg">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {[
+                            { id: "light", icon: Sun, label: "Day" },
+                            { id: "dark", icon: Moon, label: "Night" },
+                            { id: "system", icon: Monitor, label: "System" }
+                        ].map((mode) => (
+                            <button
+                                key={mode.id}
+                                onClick={() => setTheme(mode.id)}
+                                className={`flex flex-col items-center gap-3 p-6 rounded-2xl border-4 transition-all lofi-shadow ${theme === mode.id
+                                        ? 'bg-lofi-text text-lofi-bg border-lofi-text translate-y-[-4px]'
+                                        : 'bg-lofi-bg border-lofi-border text-lofi-text opacity-70 hover:opacity-100'
+                                    }`}
+                            >
+                                <mode.icon className="h-8 w-8" />
+                                <span className="text-xs font-black uppercase tracking-widest">{mode.label}</span>
+                            </button>
+                        ))}
                     </div>
                 </CardContent>
             </Card>
 
-            {/* Subscription */}
-            <Card>
-                <CardHeader>
+            {/* Membership */}
+            <Card className="lofi-border lofi-shadow border-4 overflow-hidden">
+                <CardHeader className="bg-lofi-card border-b-4 border-lofi-border">
                     <div className="flex justify-between items-center">
-                        <CardTitle>Membership</CardTitle>
-                        <Badge variant="secondary">Free Tier</Badge>
+                        <CardTitle className="text-xl font-black uppercase text-lofi-text">Membership</CardTitle>
+                        <Badge className="bg-lofi-yellow text-lofi-black lofi-border uppercase text-[10px] font-black px-4 py-1.5 lofi-shadow tracking-[0.2em]">FREE</Badge>
                     </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                        You are currently on the Free plan. Upgrade to unlock voice reflection, advanced insights, and more.
+                <CardContent className="pt-6 space-y-4 bg-white dark:bg-lofi-card-bg">
+                    <p className="text-sm font-bold text-lofi-text leading-relaxed italic">
+                        You are currently exploring Breeze on the Seedling plan. <br />
+                        Upgrade to unlock Forest Insights, Voice Journaling, and deeper growth metrics.
                     </p>
-                    <Button variant="calm" className="w-full">Upgrade to Premium</Button>
+                    <Button className="w-full bg-lofi-text text-lofi-bg lofi-border font-black uppercase tracking-widest py-6 lofi-shadow hover:translate-y-[-2px] transition-transform">
+                        UPGRADE TO PREMIUM
+                    </Button>
                 </CardContent>
             </Card>
 
-            <div className="pt-8 text-center">
-                <Button variant="destructive" className="w-full sm:w-auto">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Log Out
+            <div className="pt-12">
+                <Button
+                    onClick={handleLogout}
+                    variant="destructive"
+                    className="w-full py-8 lofi-border border-4 font-black uppercase tracking-[0.3em] text-xl lofi-shadow-destructive bg-rose-500 hover:bg-rose-600 border-black"
+                >
+                    <LogOut className="mr-4 h-6 w-6" />
+                    DISCONNECT
                 </Button>
             </div>
         </div>
