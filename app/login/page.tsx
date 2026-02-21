@@ -244,7 +244,7 @@ export default function LoginPage() {
                                 disabled={loading}
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98, y: 0 }}
-                                className="w-full bg-lofi-yellow border-[3px] border-lofi-text lofi-shadow hover:translate-y-[-2px] text-lofi-black font-display font-black py-4 px-6 rounded-2xl transition-all text-xl mt-4 flex items-center justify-center gap-3 group"
+                                className="w-full bg-lofi-yellow border-[3px] border-lofi-text lofi-shadow hover:translate-y-[-2px] text-zinc-900 font-display font-black py-4 px-6 rounded-2xl transition-all text-xl mt-4 flex items-center justify-center gap-3 group"
                             >
                                 {loading ? (
                                     <Loader2 className="w-6 h-6 animate-spin" />

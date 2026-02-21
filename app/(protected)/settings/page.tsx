@@ -58,19 +58,25 @@ export default function SettingsPage() {
 
     const handleSaveProfile = async () => {
         setSaving(true)
+        console.log("Saving profile for user:", user.id, editForm)
+
         const { error } = await supabase
             .from('profiles')
-            .update({
+            .upsert({
+                id: user.id,
                 full_name: editForm.full_name,
                 avatar_url: editForm.avatar_url,
                 updated_at: new Date().toISOString()
             })
-            .eq('id', user.id)
 
-        if (!error) {
+        if (error) {
+            console.error("Save error:", error)
+            alert(`Failed to save: ${error.message}`)
+        } else {
             setProfile({ ...profile, ...editForm })
             setIsEditing(false)
             router.refresh()
+            alert("Profile updated successfully! ✨")
         }
         setSaving(false)
     }
@@ -104,7 +110,7 @@ export default function SettingsPage() {
                         )}
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="pt-6 bg-white dark:bg-lofi-card-bg">
+                <CardContent className="pt-6 bg-lofi-card dark:bg-lofi-card-bg">
                     <AnimatePresence mode="wait">
                         {isEditing ? (
                             <motion.div
@@ -119,7 +125,7 @@ export default function SettingsPage() {
                                         <input
                                             value={editForm.full_name}
                                             onChange={(e) => setEditForm({ ...editForm, full_name: e.target.value })}
-                                            className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
+                                            className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold text-lofi-text focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
                                             placeholder="Enter your name"
                                         />
                                     </div>
@@ -128,7 +134,7 @@ export default function SettingsPage() {
                                         <input
                                             value={editForm.avatar_url}
                                             onChange={(e) => setEditForm({ ...editForm, avatar_url: e.target.value })}
-                                            className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
+                                            className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold text-lofi-text focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
                                             placeholder="https://example.com/avatar.jpg"
                                         />
                                     </div>
@@ -137,14 +143,14 @@ export default function SettingsPage() {
                                     <Button
                                         onClick={handleSaveProfile}
                                         disabled={saving}
-                                        className="flex-1 bg-lofi-yellow text-lofi-black lofi-border font-black uppercase lofi-shadow hover:translate-y-[-2px]"
+                                        className="flex-1 bg-lofi-yellow text-zinc-900 lofi-border font-black uppercase lofi-shadow hover:translate-y-[-2px]"
                                     >
                                         {saving ? <Loader2 className="animate-spin h-5 w-5" /> : <> <Save className="mr-2 h-5 w-5" /> Save Changes</>}
                                     </Button>
                                     <Button
                                         onClick={() => setIsEditing(false)}
                                         variant="outline"
-                                        className="lofi-border font-black uppercase"
+                                        className="lofi-border font-black uppercase text-lofi-text"
                                     >
                                         <X className="mr-2 h-5 w-5" /> Cancel
                                     </Button>
@@ -162,11 +168,11 @@ export default function SettingsPage() {
                                         {profile?.avatar_url ? (
                                             <img src={profile.avatar_url} alt="Profile" className="h-full w-full object-cover" />
                                         ) : (
-                                            <User className="h-12 w-12 text-black" />
+                                            <User className="h-12 w-12 text-lofi-text" />
                                         )}
                                     </div>
-                                    <div className="absolute -bottom-1 -right-1 bg-lofi-yellow lofi-border p-1.5 rounded-full lofi-shadow">
-                                        <Camera className="h-4 w-4 text-black" />
+                                    <div className="absolute -bottom-1 -right-1 bg-lofi-yellow lofi-border p-1.5 rounded-full lofi-shadow border-zinc-900">
+                                        <Camera className="h-4 w-4 text-zinc-900" />
                                     </div>
                                 </div>
                                 <div className="flex-1 text-center sm:text-left">
@@ -177,10 +183,10 @@ export default function SettingsPage() {
                                         {user?.email}
                                     </p>
                                     <div className="mt-3 flex gap-2 justify-center sm:justify-start">
-                                        <Badge className="bg-mint-green text-black lofi-border uppercase text-[10px] font-black tracking-widest px-3 py-1">
+                                        <Badge className="bg-mint-green text-charcoal lofi-border uppercase text-[10px] font-black tracking-widest px-3 py-1">
                                             LVL {Math.floor((profile?.xp || 0) / 100) + 1}
                                         </Badge>
-                                        <Badge className="bg-pastel-yellow text-black lofi-border uppercase text-[10px] font-black tracking-widest px-3 py-1">
+                                        <Badge className="bg-pastel-yellow text-charcoal lofi-border uppercase text-[10px] font-black tracking-widest px-3 py-1">
                                             {profile?.streak || 0}-DAY STREAK
                                         </Badge>
                                     </div>
@@ -196,7 +202,7 @@ export default function SettingsPage() {
                 <CardHeader className="bg-lofi-card border-b-4 border-lofi-border">
                     <CardTitle className="text-xl font-black uppercase text-lofi-text">Appearance</CardTitle>
                 </CardHeader>
-                <CardContent className="pt-6 bg-white dark:bg-lofi-card-bg">
+                <CardContent className="pt-6 bg-lofi-card dark:bg-lofi-card-bg">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {[
                             { id: "light", icon: Sun, label: "Day" },
@@ -207,8 +213,8 @@ export default function SettingsPage() {
                                 key={mode.id}
                                 onClick={() => setTheme(mode.id)}
                                 className={`flex flex-col items-center gap-3 p-6 rounded-2xl border-4 transition-all lofi-shadow ${theme === mode.id
-                                        ? 'bg-lofi-text text-lofi-bg border-lofi-text translate-y-[-4px]'
-                                        : 'bg-lofi-bg border-lofi-border text-lofi-text opacity-70 hover:opacity-100'
+                                    ? 'bg-lofi-text text-lofi-bg border-lofi-text translate-y-[-4px]'
+                                    : 'bg-lofi-bg border-lofi-border text-lofi-text opacity-70 hover:opacity-100'
                                     }`}
                             >
                                 <mode.icon className="h-8 w-8" />
@@ -224,10 +230,10 @@ export default function SettingsPage() {
                 <CardHeader className="bg-lofi-card border-b-4 border-lofi-border">
                     <div className="flex justify-between items-center">
                         <CardTitle className="text-xl font-black uppercase text-lofi-text">Membership</CardTitle>
-                        <Badge className="bg-lofi-yellow text-lofi-black lofi-border uppercase text-[10px] font-black px-4 py-1.5 lofi-shadow tracking-[0.2em]">FREE</Badge>
+                        <Badge className="bg-lofi-yellow text-zinc-900 lofi-border uppercase text-[10px] font-black px-4 py-1.5 lofi-shadow tracking-[0.2em] border-zinc-900">FREE</Badge>
                     </div>
                 </CardHeader>
-                <CardContent className="pt-6 space-y-4 bg-white dark:bg-lofi-card-bg">
+                <CardContent className="pt-6 space-y-4 bg-lofi-card dark:bg-lofi-card-bg">
                     <p className="text-sm font-bold text-lofi-text leading-relaxed italic">
                         You are currently exploring Breeze on the Seedling plan. <br />
                         Upgrade to unlock Forest Insights, Voice Journaling, and deeper growth metrics.
@@ -242,7 +248,7 @@ export default function SettingsPage() {
                 <Button
                     onClick={handleLogout}
                     variant="destructive"
-                    className="w-full py-8 lofi-border border-4 font-black uppercase tracking-[0.3em] text-xl lofi-shadow-destructive bg-rose-500 hover:bg-rose-600 border-black"
+                    className="w-full py-8 lofi-border border-4 font-black uppercase tracking-[0.3em] text-xl lofi-shadow-destructive bg-rose-500 hover:bg-rose-600 border-black text-white"
                 >
                     <LogOut className="mr-4 h-6 w-6" />
                     DISCONNECT

@@ -158,13 +158,26 @@
   --lofi-cream: #0A0A0A;
   --lofi-yellow: #FFD700;
   --lofi-black: #F8FAFC;
-  --lofi-grey: #262626;
+  --lofi-grey: #404040;
   --grid-color: #1A1A1A;
 
   --lofi-border: #F8FAFC;
   --lofi-bg: #0A0A0A;
   --lofi-text: #F8FAFC;
   --lofi-card-bg: #141414;
+
+  /* Dark Theme Palette Optimization */
+  --color-mint-green: #2D4A43;
+  /* Deeper Mint */
+  --color-pastel-pink: #4A2D35;
+  /* Deeper Pink */
+  --color-pastel-yellow: #4A422D;
+  /* Deeper Yellow */
+
+  --color-deep-mint: #B2D8D0;
+  --color-deep-pink: #FFC0CB;
+  --color-deep-yellow: #FEF08A;
+  --color-charcoal: #F8FAFC;
 }
 
 body {

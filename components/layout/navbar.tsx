@@ -100,7 +100,7 @@ export function Navbar() {
                                 </Link>
                                 <button
                                     onClick={handleLogout}
-                                    className="bg-lofi-black text-white px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest lofi-shadow hover:translate-y-[-2px] transition-transform"
+                                    className="bg-lofi-black text-lofi-bg px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest lofi-shadow hover:translate-y-[-2px] transition-transform"
                                 >
                                     Logout
                                 </button>
@@ -113,7 +113,7 @@ export function Navbar() {
                                     </button>
                                 </Link>
                                 <Link href="/login">
-                                    <button className="bg-lofi-yellow text-lofi-black lofi-border px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest lofi-shadow hover:translate-y-[-2px] transition-transform">
+                                    <button className="bg-lofi-yellow text-zinc-900 lofi-border px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest lofi-shadow hover:translate-y-[-2px] transition-transform">
                                         JOIN NOW
                                     </button>
                                 </Link>
