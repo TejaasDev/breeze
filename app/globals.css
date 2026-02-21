@@ -40,11 +40,14 @@
   --color-lofi-border: var(--lofi-border);
   --color-lofi-card: var(--lofi-card-bg);
   --color-mint-green: #B2D8D0;
-  /* Strengthened */
   --color-pastel-pink: #FFC0CB;
-  /* Strengthened */
   --color-pastel-yellow: #FEF08A;
-  /* Strengthened to tailwind yellow-200 equivalent */
+
+  /* Deep Contrast Colors */
+  --color-deep-mint: #1E3A34;
+  --color-deep-pink: #4A1D24;
+  --color-deep-yellow: #423103;
+  --color-charcoal: #1A1A1A;
 }
 
 :root {
