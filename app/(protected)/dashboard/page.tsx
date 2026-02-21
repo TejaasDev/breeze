@@ -54,8 +54,8 @@ export default function DashboardPage() {
                         />
                     </div>
                     <div>
-                        <h1 className="text-3xl font-bold tracking-tight uppercase">Breeze</h1>
-                        <p className="text-sm font-bold opacity-90">
+                        <h1 className="text-3xl font-black tracking-tight uppercase">Breeze</h1>
+                        <p className="text-sm font-black">
                             Good morning, {user?.email?.split('@')[0] || 'Voyager'}
                         </p>
                     </div>
@@ -89,8 +89,8 @@ export default function DashboardPage() {
                                 LVL {Math.floor((profile?.xp || 0) / 100) + 1}
                             </div>
                         </div>
-                        <h2 className="text-3xl font-bold uppercase mb-1">Bloom Status</h2>
-                        <p className="text-sm font-bold mb-6 italic opacity-90">
+                        <h2 className="text-3xl font-black uppercase mb-1">Bloom Status</h2>
+                        <p className="text-sm font-black mb-6 italic">
                             {profile?.streak > 0 ? `Growing ${profile.streak * 5}% faster this week!` : "Ready to start growing?"}
                         </p>
 
@@ -101,7 +101,7 @@ export default function DashboardPage() {
                                 className="bg-lofi-black dark:bg-white h-full"
                             />
                         </div>
-                        <div className="flex justify-between w-full text-[10px] font-black uppercase tracking-widest opacity-80">
+                        <div className="flex justify-between w-full text-xs font-black uppercase tracking-widest">
                             <span>Seedling</span>
                             <span>Sprout</span>
                         </div>
@@ -122,10 +122,10 @@ export default function DashboardPage() {
                         <Heart className="w-6 h-6" />
                     </div>
                     <div className="text-lofi-text dark:text-white">
-                        <p className="text-xs font-bold uppercase tracking-wider mb-1">Confidence</p>
+                        <p className="text-sm font-black uppercase tracking-wider mb-1">Confidence</p>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-bold">{profile?.confidence_score || 0}</span>
-                            <span className="text-xs font-bold hand-drawn text-emerald-600">+4%</span>
+                            <span className="text-4xl font-black text-lofi-text">{profile?.confidence_score || 0}</span>
+                            <span className="text-sm font-black hand-drawn text-emerald-700">+4%</span>
                         </div>
                     </div>
                 </motion.div>
@@ -138,10 +138,10 @@ export default function DashboardPage() {
                         <Flame className="w-6 h-6" />
                     </div>
                     <div className="text-lofi-text dark:text-white">
-                        <p className="text-xs font-bold uppercase tracking-wider mb-1">Streak</p>
+                        <p className="text-sm font-black uppercase tracking-wider mb-1">Streak</p>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-bold">{profile?.streak || 0}</span>
-                            <span className="text-xs font-bold hand-drawn">days</span>
+                            <span className="text-4xl font-black text-lofi-text">{profile?.streak || 0}</span>
+                            <span className="text-sm font-black hand-drawn text-lofi-text">days</span>
                         </div>
                     </div>
                 </motion.div>
@@ -178,7 +178,7 @@ export default function DashboardPage() {
                             className="text-lofi-text"
                         />
                     </svg>
-                    <div className="absolute bottom-4 left-6 right-6 flex justify-between text-[10px] font-bold text-lofi-text opacity-80 uppercase">
+                    <div className="absolute bottom-4 left-6 right-6 flex justify-between text-xs font-black text-lofi-text uppercase">
                         <span>Mon</span>
                         <span>Wed</span>
                         <span>Fri</span>
@@ -199,8 +199,8 @@ export default function DashboardPage() {
                         </div>
                     </div>
                     <div className="flex-1 text-lofi-text">
-                        <h4 className="font-bold uppercase text-sm mb-1">Today's Mission</h4>
-                        <p className="text-sm font-bold leading-tight opacity-90">
+                        <h4 className="font-black uppercase text-sm mb-1">Today's Mission</h4>
+                        <p className="text-base font-black leading-tight">
                             {profile?.current_task || "The Coffee Shop Smile: Briefly visit a store and smile at the cashier."}
                         </p>
                         <button className="mt-3 text-xs font-bold uppercase underline decoration-2 underline-offset-4 hover:text-lofi-yellow transition-colors flex items-center gap-1">
@@ -221,7 +221,7 @@ export default function DashboardPage() {
                         <div className="stamp-icon self-start">
                             <Sun className="w-5 h-5" />
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-tighter">Radiant</span>
+                        <span className="text-xs font-black uppercase tracking-widest text-lofi-text">Radiant</span>
                     </motion.div>
 
                     <motion.div
@@ -231,7 +231,7 @@ export default function DashboardPage() {
                         <div className="stamp-icon self-start">
                             <Leaf className="w-5 h-5" />
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-tighter">Peaceful</span>
+                        <span className="text-xs font-black uppercase tracking-widest text-lofi-text">Peaceful</span>
                     </motion.div>
 
                     <motion.div
@@ -241,7 +241,7 @@ export default function DashboardPage() {
                         <div className="stamp-icon self-start">
                             <Wind className="w-5 h-5" />
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-tighter">Dynamic</span>
+                        <span className="text-xs font-black uppercase tracking-widest text-lofi-text">Dynamic</span>
                     </motion.div>
                 </div>
             </section>
