@@ -80,10 +80,10 @@ export function Navbar() {
                 </div>
 
                 <nav className="hidden md:flex items-center gap-8">
-                    <Link href="/#features" className="text-xs font-black uppercase tracking-widest text-lofi-text/60 hover:text-lofi-text transition-colors">
+                    <Link href="/#features" className="text-xs font-black uppercase tracking-widest text-lofi-text/80 hover:text-lofi-text transition-colors">
                         Features
                     </Link>
-                    <Link href="/#philosophy" className="text-xs font-black uppercase tracking-widest text-lofi-text/60 hover:text-lofi-text transition-colors">
+                    <Link href="/#philosophy" className="text-xs font-black uppercase tracking-widest text-lofi-text/80 hover:text-lofi-text transition-colors">
                         Why us?
                     </Link>
                 </nav>

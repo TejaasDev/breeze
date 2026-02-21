@@ -87,7 +87,7 @@ export function Sidebar() {
                     </div>
                     <div className="flex-1 overflow-hidden">
                         <p className="text-sm font-black uppercase truncate">Professor</p>
-                        <p className="text-[10px] font-bold opacity-50 uppercase tracking-widest truncate">Level 14 • Bloom Status</p>
+                        <p className="text-[10px] font-black opacity-80 uppercase tracking-widest truncate">Level 14 • Bloom Status</p>
                     </div>
                 </div>
             </div>

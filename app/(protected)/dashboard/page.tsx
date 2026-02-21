@@ -55,7 +55,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                         <h1 className="text-3xl font-bold tracking-tight uppercase">Breeze</h1>
-                        <p className="text-sm font-medium opacity-70">
+                        <p className="text-sm font-bold opacity-90">
                             Good morning, {user?.email?.split('@')[0] || 'Voyager'}
                         </p>
                     </div>
@@ -90,7 +90,7 @@ export default function DashboardPage() {
                             </div>
                         </div>
                         <h2 className="text-3xl font-bold uppercase mb-1">Bloom Status</h2>
-                        <p className="text-sm font-medium mb-6 italic opacity-80">
+                        <p className="text-sm font-bold mb-6 italic opacity-90">
                             {profile?.streak > 0 ? `Growing ${profile.streak * 5}% faster this week!` : "Ready to start growing?"}
                         </p>
 
@@ -101,7 +101,7 @@ export default function DashboardPage() {
                                 className="bg-lofi-black dark:bg-white h-full"
                             />
                         </div>
-                        <div className="flex justify-between w-full text-[10px] font-bold uppercase tracking-tighter opacity-60">
+                        <div className="flex justify-between w-full text-[10px] font-black uppercase tracking-widest opacity-80">
                             <span>Seedling</span>
                             <span>Sprout</span>
                         </div>
@@ -178,7 +178,7 @@ export default function DashboardPage() {
                             className="text-lofi-text"
                         />
                     </svg>
-                    <div className="absolute bottom-4 left-6 right-6 flex justify-between text-[10px] font-bold text-lofi-text opacity-50 uppercase">
+                    <div className="absolute bottom-4 left-6 right-6 flex justify-between text-[10px] font-bold text-lofi-text opacity-80 uppercase">
                         <span>Mon</span>
                         <span>Wed</span>
                         <span>Fri</span>
@@ -200,7 +200,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 text-lofi-text">
                         <h4 className="font-bold uppercase text-sm mb-1">Today's Mission</h4>
-                        <p className="text-sm font-medium leading-tight opacity-80">
+                        <p className="text-sm font-bold leading-tight opacity-90">
                             {profile?.current_task || "The Coffee Shop Smile: Briefly visit a store and smile at the cashier."}
                         </p>
                         <button className="mt-3 text-xs font-bold uppercase underline decoration-2 underline-offset-4 hover:text-lofi-yellow transition-colors flex items-center gap-1">

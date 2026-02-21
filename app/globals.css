@@ -94,7 +94,8 @@
   --lofi-cream: #F9F9F2;
   --lofi-yellow: #FFD700;
   --lofi-black: #1A1A1A;
-  --lofi-grey: #D1D1CB;
+  --lofi-grey: #737373;
+  /* Darkened from #D1D1CB for better contrast */
   --grid-color: #E5E5DE;
 
   --lofi-border: var(--lofi-black);
