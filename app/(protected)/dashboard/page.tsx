@@ -76,18 +76,18 @@ export default function DashboardPage() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-mint-green lofi-border rounded-[30px] p-8 lofi-shadow relative overflow-hidden border-4 border-deep-mint shadow-[inset_0_0_40px_rgba(74,222,128,0.1)]"
+                    className="bg-mint-green lofi-border rounded-[30px] p-8 lofi-shadow relative overflow-hidden border-2 border-deep-mint/50 shadow-[inset_0_0_40px_rgba(74,222,128,0.1)]"
                 >
                     <div className="flex flex-col items-center text-center relative z-10 text-deep-mint">
                         <div className="relative mb-6">
-                            <div className="w-40 h-40 bg-lofi-card/40 border-4 border-deep-mint rounded-full p-1 overflow-hidden lofi-shadow">
+                            <div className="w-40 h-40 bg-lofi-card/40 border-2 border-deep-mint/50 rounded-full p-1 overflow-hidden lofi-shadow">
                                 <img
                                     alt="Avatar"
                                     className="w-full h-full rounded-full object-cover"
                                     src={profile?.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"}
                                 />
                             </div>
-                            <div className="absolute -bottom-2 -left-2 bg-lofi-card/60 backdrop-blur-md border-3 border-deep-mint px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest lofi-shadow text-deep-mint">
+                            <div className="absolute -bottom-2 -left-2 bg-lofi-card/60 backdrop-blur-md border-2 border-deep-mint/60 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest lofi-shadow text-deep-mint">
                                 LVL {Math.floor((profile?.xp || 0) / 100) + 1}
                             </div>
                         </div>
@@ -96,11 +96,11 @@ export default function DashboardPage() {
                             {profile?.streak > 0 ? `Growing ${profile.streak * 5}% faster this week!` : "Ready to start growing?"}
                         </p>
 
-                        <div className="w-full bg-lofi-text/10 border-3 border-deep-mint h-8 rounded-full overflow-hidden mb-3 lofi-shadow shadow-inner">
+                        <div className="w-full bg-lofi-text/10 border-2 border-deep-mint/40 h-8 rounded-full overflow-hidden mb-3 lofi-shadow shadow-inner">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${(profile?.xp % 100) || 30}%` }}
-                                className="bg-deep-mint h-full shadow-[0_0_20px_rgba(74,222,128,0.4)]"
+                                className="bg-deep-mint h-full shadow-[0_0_20px_rgba(74,222,128,0.3)]"
                             />
                         </div>
                         <div className="flex justify-between w-full text-xs font-black uppercase tracking-widest">
@@ -190,10 +190,10 @@ export default function DashboardPage() {
             <section>
                 <motion.div
                     whileHover={{ scale: 1.01 }}
-                    className="bg-lofi-card border-4 border-deep-mint p-8 rounded-[30px] lofi-shadow flex gap-6 items-start"
+                    className="bg-lofi-card border-2 border-deep-mint/50 p-8 rounded-[30px] lofi-shadow flex gap-6 items-start"
                 >
                     <div className="shrink-0">
-                        <div className="bg-mint-green border-3 border-deep-mint p-3 rounded-2xl text-deep-mint lofi-shadow">
+                        <div className="bg-mint-green border-2 border-deep-mint/40 p-3 rounded-2xl text-deep-mint lofi-shadow">
                             <Lightbulb className="w-8 h-8" />
                         </div>
                     </div>

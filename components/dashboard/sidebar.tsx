@@ -116,7 +116,7 @@ export function Sidebar() {
                         {profile?.avatar_url ? (
                             <img src={profile.avatar_url} alt="Profile" className="h-full w-full object-cover" />
                         ) : (
-                            <User className="h-5 w-5 text-black" />
+                            <User className="h-5 w-5 text-lofi-text" />
                         )}
                     </div>
                     <div className="flex-1 overflow-hidden">
