@@ -18,6 +18,7 @@ import {
     TrendingUp
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { isAllowedImageUrl } from "@/lib/security"
 
 export default function DashboardPage() {
     const [user, setUser] = useState<any>(null)
@@ -84,7 +85,12 @@ export default function DashboardPage() {
                                 <img
                                     alt="Avatar"
                                     className="w-full h-full rounded-full object-cover"
-                                    src={profile?.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"}
+                                    referrerPolicy="no-referrer"
+                                    src={
+                                        profile?.avatar_url && isAllowedImageUrl(profile.avatar_url)
+                                            ? profile.avatar_url
+                                            : "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+                                    }
                                 />
                             </div>
                             <div className="absolute -bottom-2 -left-2 bg-lofi-card/60 backdrop-blur-md border-2 border-deep-mint/60 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest lofi-shadow text-deep-mint">

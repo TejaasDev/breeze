@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { motion, AnimatePresence } from "framer-motion"
-import { Sun, Heart, CloudLightning, Leaf, Eye, EyeOff, Loader2, Sparkles, ArrowRight } from "lucide-react"
-
+import { Sun, Heart, CloudLightning, Leaf, Eye, EyeOff, Loader2, Sparkles, ArrowRight, ShieldCheck, AlertTriangle } from "lucide-react"
+import { checkRateLimit, obfuscateAuthError, isValidEmail, isStrongPassword } from "@/lib/security"
 import Image from "next/image"
 
 export default function LoginPage() {
@@ -17,11 +17,22 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null)
     const [isSignUp, setIsSignUp] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    const [isRateLimited, setIsRateLimited] = useState(false)
+    const [rateLimitCountdown, setRateLimitCountdown] = useState(0)
 
     const supabase = createClient()
     const router = useRouter()
 
     const handleGoogleLogin = async () => {
+        // Rate limit OAuth attempts too
+        const rateCheck = checkRateLimit("oauth_login", 5, 60000)
+        if (!rateCheck.allowed) {
+            setIsRateLimited(true)
+            setRateLimitCountdown(Math.ceil(rateCheck.retryAfterMs / 1000))
+            setError(`Too many attempts. Please wait ${Math.ceil(rateCheck.retryAfterMs / 1000)}s.`)
+            return
+        }
+
         setLoading(true)
         setError(null)
         try {
@@ -37,15 +48,48 @@ export default function LoginPage() {
             })
             if (error) throw error
         } catch (err: any) {
-            setError(err.message)
+            setError(obfuscateAuthError(err.message))
             setLoading(false)
         }
     }
 
     const handleAuth = async (e: React.FormEvent) => {
         e.preventDefault()
-        setLoading(true)
         setError(null)
+
+        // Client-side validation
+        if (!isValidEmail(email)) {
+            setError("Please enter a valid email address.")
+            return
+        }
+
+        if (isSignUp && !isStrongPassword(password)) {
+            setError("Password must be 8+ chars with uppercase, lowercase, and a number.")
+            return
+        }
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters.")
+            return
+        }
+
+        // Rate limiting — 5 attempts per minute per action
+        const rateCheck = checkRateLimit(`auth_${isSignUp ? 'signup' : 'login'}`, 5, 60000)
+        if (!rateCheck.allowed) {
+            setIsRateLimited(true)
+            const seconds = Math.ceil(rateCheck.retryAfterMs / 1000)
+            setRateLimitCountdown(seconds)
+            setError(`Too many attempts. Please wait ${seconds}s before trying again.`)
+
+            // Auto-clear rate limit message
+            setTimeout(() => {
+                setIsRateLimited(false)
+                setError(null)
+            }, rateCheck.retryAfterMs)
+            return
+        }
+
+        setLoading(true)
 
         try {
             if (isSignUp) {
@@ -57,7 +101,9 @@ export default function LoginPage() {
                     },
                 })
                 if (error) throw error
-                alert("Check your email for the confirmation link!")
+                setError(null)
+                // Use a toast-style message instead of alert()
+                setError("✅ Check your email for the confirmation link!")
             } else {
                 const { error } = await supabase.auth.signInWithPassword({
                     email,
@@ -68,7 +114,8 @@ export default function LoginPage() {
                 router.refresh()
             }
         } catch (err: any) {
-            setError(err.message)
+            // Obfuscate error to prevent user enumeration
+            setError(obfuscateAuthError(err.message))
         } finally {
             setLoading(false)
         }
@@ -123,8 +170,8 @@ export default function LoginPage() {
                         <span>AI-Powered Companion</span>
                     </div>
                     <div className="px-6 py-3 bg-lofi-card lofi-border rounded-full flex items-center gap-2 text-sm font-bold shadow-md">
-                        <Heart className="w-4 h-4 text-rose-400 fill-rose-400" />
-                        <span>Wellness First</span>
+                        <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                        <span>End-to-End Secure</span>
                     </div>
                 </div>
 
@@ -178,7 +225,8 @@ export default function LoginPage() {
                             whileHover={{ y: -2, scale: 1.01 }}
                             whileTap={{ scale: 0.99 }}
                             onClick={handleGoogleLogin}
-                            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-lofi-card border-[3px] border-lofi-text lofi-shadow rounded-2xl font-bold text-lofi-text hover:bg-lofi- cream transition-all"
+                            disabled={isRateLimited || loading}
+                            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-lofi-card border-[3px] border-lofi-text lofi-shadow rounded-2xl font-bold text-lofi-text hover:bg-lofi-cream transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <svg className="h-5 w-5" viewBox="0 0 24 24">
                                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -195,45 +243,69 @@ export default function LoginPage() {
                             <div className="h-[2px] flex-1 bg-lofi-text opacity-10"></div>
                         </div>
 
-                        <form className="space-y-4" onSubmit={handleAuth}>
+                        <form className="space-y-4" onSubmit={handleAuth} noValidate>
                             <div className="space-y-2">
-                                <label className="text-sm font-black uppercase tracking-wider text-lofi-text opacity-70 ml-1">Email Address</label>
+                                <label htmlFor="email-input" className="text-sm font-black uppercase tracking-wider text-lofi-text opacity-70 ml-1">Email Address</label>
                                 <input
+                                    id="email-input"
                                     className="w-full px-6 py-4 bg-lofi-card border-[3px] border-lofi-text rounded-2xl focus:ring-4 focus:ring-lofi-yellow/20 outline-none text-lofi-text text-lg font-medium placeholder:text-lofi-grey transition-all"
                                     placeholder="your@email.com"
                                     type="email"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={(e) => setEmail(e.target.value.trim())}
                                     required
+                                    autoComplete="email"
+                                    maxLength={254}
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-black uppercase tracking-wider text-lofi-text opacity-70 ml-1">Password</label>
+                                <label htmlFor="password-input" className="text-sm font-black uppercase tracking-wider text-lofi-text opacity-70 ml-1">Password</label>
                                 <div className="relative">
                                     <input
+                                        id="password-input"
                                         className="w-full px-6 py-4 bg-lofi-card border-[3px] border-lofi-text rounded-2xl focus:ring-4 focus:ring-lofi-yellow/20 outline-none text-lofi-text text-lg font-medium placeholder:text-lofi-grey transition-all"
                                         placeholder="••••••••"
                                         type={showPassword ? "text" : "password"}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
+                                        autoComplete={isSignUp ? "new-password" : "current-password"}
+                                        maxLength={128}
+                                        minLength={6}
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
                                         className="absolute right-5 top-1/2 -translate-y-1/2 text-lofi-text opacity-60 hover:opacity-100 transition-opacity"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
                                     >
                                         {showPassword ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
                                     </button>
                                 </div>
+                                {isSignUp && password.length > 0 && (
+                                    <div className="flex items-center gap-2 ml-1 mt-1">
+                                        {isStrongPassword(password) ? (
+                                            <span className="text-xs text-emerald-500 font-bold flex items-center gap-1">
+                                                <ShieldCheck className="w-3 h-3" /> Strong password
+                                            </span>
+                                        ) : (
+                                            <span className="text-xs text-amber-500 font-bold flex items-center gap-1">
+                                                <AlertTriangle className="w-3 h-3" /> Need uppercase, lowercase & number (8+ chars)
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
                             </div>
 
                             {error && (
                                 <motion.p
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    className="bg-rose-50 border-2 border-rose-200 text-rose-600 p-4 rounded-xl text-sm font-bold text-center"
+                                    className={`p-4 rounded-xl text-sm font-bold text-center ${error.startsWith("✅")
+                                            ? "bg-emerald-50 border-2 border-emerald-200 text-emerald-600"
+                                            : "bg-rose-50 border-2 border-rose-200 text-rose-600"
+                                        }`}
                                 >
                                     {error}
                                 </motion.p>
@@ -241,10 +313,10 @@ export default function LoginPage() {
 
                             <motion.button
                                 type="submit"
-                                disabled={loading}
+                                disabled={loading || isRateLimited}
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98, y: 0 }}
-                                className="w-full bg-lofi-yellow border-[3px] border-lofi-text lofi-shadow hover:translate-y-[-2px] text-zinc-900 font-display font-black py-4 px-6 rounded-2xl transition-all text-xl mt-4 flex items-center justify-center gap-3 group"
+                                className="w-full bg-lofi-yellow border-[3px] border-lofi-text lofi-shadow hover:translate-y-[-2px] text-zinc-900 font-display font-black py-4 px-6 rounded-2xl transition-all text-xl mt-4 flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {loading ? (
                                     <Loader2 className="w-6 h-6 animate-spin" />
@@ -260,7 +332,10 @@ export default function LoginPage() {
                         <p className="text-center mt-10 text-lofi-text font-medium text-lg">
                             {isSignUp ? "Already a sprout?" : "New to the garden?"}{" "}
                             <button
-                                onClick={() => setIsSignUp(!isSignUp)}
+                                onClick={() => {
+                                    setIsSignUp(!isSignUp)
+                                    setError(null)
+                                }}
                                 className="font-bold underline decoration-[3px] underline-offset-4 decoration-lofi-yellow hover:text-lofi-yellow transition-colors"
                             >
                                 {isSignUp ? "Log In" : "Join the Community"}

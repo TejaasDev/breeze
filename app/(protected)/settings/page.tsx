@@ -5,10 +5,11 @@ import { useTheme } from "next-themes"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Moon, Sun, Monitor, LogOut, User, Camera, Save, X, Loader2 } from "lucide-react"
+import { Moon, Sun, Monitor, LogOut, User, Camera, Save, X, Loader2, ShieldAlert } from "lucide-react"
 import { createClient } from "@/lib/supabase-browser"
 import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
+import { isAllowedImageUrl, isValidDisplayName, sanitizeText } from "@/lib/security"
 
 export default function SettingsPage() {
     const { setTheme, theme } = useTheme()
@@ -19,6 +20,7 @@ export default function SettingsPage() {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
+    const [validationError, setValidationError] = useState<string | null>(null)
     const [editForm, setEditForm] = useState({
         full_name: "",
         avatar_url: ""
@@ -57,28 +59,53 @@ export default function SettingsPage() {
     }
 
     const handleSaveProfile = async () => {
+        setValidationError(null)
+
+        // Validate display name
+        const trimmedName = editForm.full_name.trim()
+        if (trimmedName && !isValidDisplayName(trimmedName)) {
+            setValidationError("Name can only contain letters, numbers, spaces, and basic punctuation (max 50 chars).")
+            return
+        }
+
+        // Validate avatar URL — prevents javascript: URI and arbitrary domain injection
+        const trimmedUrl = editForm.avatar_url.trim()
+        if (trimmedUrl && !isAllowedImageUrl(trimmedUrl)) {
+            setValidationError("Avatar URL must be a valid HTTPS link from a trusted source (Supabase, Google, GitHub, or DiceBear).")
+            return
+        }
+
         setSaving(true)
-        console.log("Saving profile for user:", user.id, editForm)
+
+        // Sanitize before database write
+        const sanitizedName = trimmedName ? sanitizeText(trimmedName) : ""
 
         const { error } = await supabase
             .from('profiles')
             .upsert({
                 id: user.id,
-                full_name: editForm.full_name,
-                avatar_url: editForm.avatar_url,
+                full_name: sanitizedName,
+                avatar_url: trimmedUrl,
                 updated_at: new Date().toISOString()
             })
 
         if (error) {
-            console.error("Save error:", error)
-            alert(`Failed to save: ${error.message}`)
+            // Don't expose raw database errors to the user
+            setValidationError("Failed to save profile. Please try again.")
         } else {
-            setProfile({ ...profile, ...editForm })
+            setProfile({ ...profile, full_name: sanitizedName, avatar_url: trimmedUrl })
             setIsEditing(false)
             router.refresh()
-            alert("Profile updated successfully! ✨")
         }
         setSaving(false)
+    }
+
+    // Safe avatar renderer — only renders whitelisted URLs
+    const renderAvatar = (url: string | null | undefined) => {
+        if (url && isAllowedImageUrl(url)) {
+            return <img src={url} alt="Profile" className="h-full w-full object-cover" referrerPolicy="no-referrer" />
+        }
+        return <User className="h-12 w-12 text-lofi-text" />
     }
 
     if (loading) {
@@ -100,7 +127,10 @@ export default function SettingsPage() {
                         Profile
                         {!isEditing && (
                             <Button
-                                onClick={() => setIsEditing(true)}
+                                onClick={() => {
+                                    setIsEditing(true)
+                                    setValidationError(null)
+                                }}
                                 variant="outline"
                                 size="sm"
                                 className="lofi-border font-black uppercase text-xs"
@@ -121,24 +151,43 @@ export default function SettingsPage() {
                             >
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-xs font-black uppercase tracking-widest text-lofi-text/60">Display Name</label>
+                                        <label htmlFor="display-name" className="text-xs font-black uppercase tracking-widest text-lofi-text/60">Display Name</label>
                                         <input
+                                            id="display-name"
                                             value={editForm.full_name}
                                             onChange={(e) => setEditForm({ ...editForm, full_name: e.target.value })}
                                             className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold text-lofi-text focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
                                             placeholder="Enter your name"
+                                            maxLength={50}
+                                            autoComplete="name"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-xs font-black uppercase tracking-widest text-lofi-text/60">Avatar URL</label>
+                                        <label htmlFor="avatar-url" className="text-xs font-black uppercase tracking-widest text-lofi-text/60">Avatar URL</label>
                                         <input
+                                            id="avatar-url"
                                             value={editForm.avatar_url}
                                             onChange={(e) => setEditForm({ ...editForm, avatar_url: e.target.value })}
                                             className="w-full p-4 bg-lofi-bg lofi-border rounded-xl font-bold text-lofi-text focus:outline-none focus:ring-2 focus:ring-lofi-yellow"
                                             placeholder="https://example.com/avatar.jpg"
+                                            maxLength={500}
+                                            type="url"
                                         />
+                                        <span className="text-[10px] font-bold text-lofi-text/40 ml-1">Only HTTPS URLs from Supabase, Google, GitHub, or DiceBear are allowed.</span>
                                     </div>
                                 </div>
+
+                                {validationError && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        className="flex items-center gap-2 p-3 bg-rose-50 border-2 border-rose-200 rounded-xl text-rose-600 text-sm font-bold"
+                                    >
+                                        <ShieldAlert className="w-4 h-4 shrink-0" />
+                                        {validationError}
+                                    </motion.div>
+                                )}
+
                                 <div className="flex gap-4 pt-4">
                                     <Button
                                         onClick={handleSaveProfile}
@@ -148,7 +197,10 @@ export default function SettingsPage() {
                                         {saving ? <Loader2 className="animate-spin h-5 w-5" /> : <> <Save className="mr-2 h-5 w-5" /> Save Changes</>}
                                     </Button>
                                     <Button
-                                        onClick={() => setIsEditing(false)}
+                                        onClick={() => {
+                                            setIsEditing(false)
+                                            setValidationError(null)
+                                        }}
                                         variant="outline"
                                         className="lofi-border font-black uppercase text-lofi-text"
                                     >
@@ -165,11 +217,7 @@ export default function SettingsPage() {
                             >
                                 <div className="relative">
                                     <div className="h-24 w-24 rounded-full lofi-border border-4 bg-pastel-pink lofi-shadow overflow-hidden flex items-center justify-center">
-                                        {profile?.avatar_url ? (
-                                            <img src={profile.avatar_url} alt="Profile" className="h-full w-full object-cover" />
-                                        ) : (
-                                            <User className="h-12 w-12 text-lofi-text" />
-                                        )}
+                                        {renderAvatar(profile?.avatar_url)}
                                     </div>
                                     <div className="absolute -bottom-1 -right-1 bg-lofi-yellow lofi-border p-1.5 rounded-full lofi-shadow border-zinc-900">
                                         <Camera className="h-4 w-4 text-zinc-900" />
